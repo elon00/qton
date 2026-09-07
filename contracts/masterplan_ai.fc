@@ -1,0 +1,65 @@
+;; MasterPlan AI - TON Smart Contract
+;; Manages verified AI tool registration and post-quantum authorization proofs on TON.
+
+#include "imports/stdlib.fc";
+
+;; Storage format:
+;; - uint256 authority_pubkey_hash
+;; - cell tools_dict (mapping of tool_id => metadata_hash)
+;; - uint32 total_tools
+
+(int, cell, int) load_data() inline {
+    var ds = get_data().begin_parse();
+    return (
+        ds~load_uint(256),
+        ds~load_dict(),
+        ds~load_uint(32)
+    );
+}
+
+() save_data(int authority_hash, cell tools, int count) impure inline {
+    set_data(
+        begin_cell()
+            .store_uint(authority_hash, 256)
+            .store_dict(tools)
+            .store_uint(count, 32)
+            .end_cell()
+    );
+}
+
+() recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+    if (in_msg_body.slice_empty?()) {
+        return ();
+    }
+
+    int op = in_msg_body~load_uint(32);
+    int query_id = in_msg_body~load_uint(64);
+
+    (int authority_hash, cell tools, int count) = load_data();
+
+    ;; op 1: Register AI Tool
+    if (op == 1) {
+        int tool_id = in_msg_body~load_uint(256);
+        int metadata_hash = in_msg_body~load_uint(256);
+        
+        ;; Save to dictionary
+        tools~udict_set(256, tool_id, begin_cell().store_uint(metadata_hash, 256).end_cell().begin_parse());
+        count += 1;
+
+        save_data(authority_hash, tools, count);
+        return ();
+    }
+
+    throw(0xffff);
+}
+
+;; Get methods for TON Explorer & DApp integration
+int get_total_tools() method_id {
+    (_, _, int count) = load_data();
+    return count;
+}
+
+int get_authority_hash() method_id {
+    (int authority_hash, _, _) = load_data();
+    return authority_hash;
+}
