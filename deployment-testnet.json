@@ -1,0 +1,19 @@
+{
+  "network": "ton-testnet",
+  "rpcEndpoint": "https://testnet.toncenter.com/api/v2/jsonRPC",
+  "deployer": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+  "contracts": {
+    "qtonMaster": {
+      "address": "kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+      "unlimitedSupply": true,
+      "explorer": "https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+      "tonviewer": "https://testnet.tonviewer.com/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58"
+    },
+    "qtonLaunchpad": {
+      "address": "kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+      "explorer": "https://testnet.tonscan.org/address/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+      "tonviewer": "https://testnet.tonviewer.com/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh"
+    }
+  },
+  "updatedAt": "2026-09-08T16:50:32.606Z"
+}

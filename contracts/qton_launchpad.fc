@@ -1,0 +1,113 @@
+;; QTON Launchpad Contract - Decentralized Token Incubator & Bonding Curve on TON
+#pragma version >=0.4.0;
+
+#include "imports/stdlib.fc";
+#include "params.fc";
+#include "op-codes.fc";
+
+;; Storage:
+;; - admin_address: MsgAddressInt
+;; - total_projects: uint32
+;; - projects_dict: Cell (dict of project_id => cell(name_hash, creator, total_raised, is_active))
+
+(slice, int, cell) load_data() inline {
+    slice ds = get_data().begin_parse();
+    return (
+        ds~load_msg_addr(),
+        ds~load_uint(32),
+        ds~load_dict()
+    );
+}
+
+() save_data(slice admin_address, int total_projects, cell projects_dict) impure inline {
+    set_data(begin_cell()
+        .store_slice(admin_address)
+        .store_uint(total_projects, 32)
+        .store_dict(projects_dict)
+        .end_cell()
+    );
+}
+
+() recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+    if (in_msg_body.slice_empty?()) {
+        return ();
+    }
+
+    slice cs = in_msg_full.begin_parse();
+    int flags = cs~load_uint(4);
+    if (flags & 1) {
+        return ();
+    }
+    slice sender_address = cs~load_msg_addr();
+    force_chain(sender_address);
+
+    int op = in_msg_body~load_uint(32);
+    int query_id = in_msg_body~load_uint(64);
+
+    (slice admin_address, int total_projects, cell projects_dict) = load_data();
+
+    ;; op 100: Create Launchpad Project
+    if (op == 100) {
+        int name_hash = in_msg_body~load_uint(256);
+        int initial_reserve = msg_value;
+
+        cell project_data = begin_cell()
+            .store_uint(name_hash, 256)
+            .store_slice(sender_address)
+            .store_coins(initial_reserve)
+            .store_uint(1, 8) ;; active
+            .end_cell();
+
+        total_projects += 1;
+        projects_dict~udict_set_ref(32, total_projects, project_data);
+        save_data(admin_address, total_projects, projects_dict);
+        return ();
+    }
+
+    ;; op 101: Invest in Bonding Curve
+    if (op == 101) {
+        int project_id = in_msg_body~load_uint(32);
+        (cell project_data, int found) = projects_dict.udict_get_ref?(32, project_id);
+        throw_unless(404, found);
+
+        slice ps = project_data.begin_parse();
+        int name_hash = ps~load_uint(256);
+        slice creator = ps~load_msg_addr();
+        int total_raised = ps~load_coins();
+        int is_active = ps~load_uint(8);
+
+        total_raised += msg_value;
+
+        cell updated_project = begin_cell()
+            .store_uint(name_hash, 256)
+            .store_slice(creator)
+            .store_coins(total_raised)
+            .store_uint(is_active, 8)
+            .end_cell();
+
+        projects_dict~udict_set_ref(32, project_id, updated_project);
+        save_data(admin_address, total_projects, projects_dict);
+        return ();
+    }
+
+    throw(0xffff);
+}
+
+;; Get methods
+int get_total_projects() method_id {
+    (_, int total_projects, _) = load_data();
+    return total_projects;
+}
+
+(int, slice, int, int) get_project_data(int project_id) method_id {
+    (_, _, cell projects_dict) = load_data();
+    (cell project_data, int found) = projects_dict.udict_get_ref?(32, project_id);
+    throw_unless(404, found);
+    slice ps = project_data.begin_parse();
+    return (
+        ps~load_uint(256),
+        ps~load_msg_addr(),
+        ps~load_coins(),
+        ps~load_uint(8)
+    );
+}

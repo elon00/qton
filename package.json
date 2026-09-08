@@ -1,24 +1,46 @@
 {
-  "name": "ton-society-india",
-  "version": "1.0.0",
-  "description": "MasterPlan AI on TON Blockchain with NIST FIPS 203/204 Post-Quantum Security",
+  "name": "qton",
+  "version": "2.0.0",
+  "description": "QTON (Quantum TON) - Post-Quantum Token on TON Blockchain with Unlimited Supply, Conway Automaton AI, NIST FIPS 204 PQC, Multi-Model Agentics, Launchpad, and Testnet Deployment Engine",
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "test:nist": "node C:/Users/marti/quantumshield/node_modules/tsx/dist/cli.mjs tests/nist-pqc.test.mjs",
-    "audit:crypto": "node scripts/audit-crypto.mjs",
-    "reality:universal": "node C:/Users/marti/quantumshield/node_modules/tsx/dist/cli.mjs scripts/reality-universal.ts",
-    "reality:certify": "node C:/Users/marti/quantumshield/node_modules/tsx/dist/cli.mjs scripts/generate-urs-certificate.ts"
+    "build": "node scripts/compile.mjs",
+    "test": "npx tsx --test tests/qton.spec.ts",
+    "wallet:info": "npx tsx scripts/wallet-info.ts",
+    "deploy:testnet": "npx tsx scripts/deploy-testnet.ts",
+    "audit:crypto": "node scripts/audit-crypto.mjs"
   },
   "keywords": [
+    "qton",
     "ton",
-    "telegram",
-    "ai",
+    "jetton",
+    "tep-74",
+    "unlimited-supply",
     "post-quantum",
-    "nist-fips-203",
     "nist-fips-204",
-    "urs-10"
+    "ml-dsa-65",
+    "conway-automaton-ai",
+    "agentic-ai",
+    "launchpad",
+    "testnet"
   ],
   "author": "elon00",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "@noble/post-quantum": "^0.7.1",
+    "@ton/core": "^0.63.1",
+    "@ton/crypto": "^3.3.0",
+    "@ton/ton": "^16.3.0",
+    "dotenv": "^17.4.2",
+    "qrcode": "^1.5.4",
+    "tsx": "^4.23.13"
+  },
+  "devDependencies": {
+    "@ton-community/func-js": "^0.11.0",
+    "@ton/sandbox": "^0.44.0",
+    "@ton/test-utils": "^0.12.0",
+    "@types/qrcode": "^1.5.6"
+  }
 }
