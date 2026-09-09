@@ -1,0 +1,35 @@
+name: Daily TON Drip Automaton
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at 00:00 UTC
+  workflow_dispatch:     # Allows manual 1-click trigger anytime from GitHub Actions tab
+
+jobs:
+  drip:
+    name: Execute Daily 1 TON Drip
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Configure Testnet Wallet Credentials
+        run: |
+          if [ -n "${{ secrets.TESTNET_WALLET_MNEMONIC }}" ]; then
+            echo "${{ secrets.TESTNET_WALLET_MNEMONIC }}" > testnet-wallet.json
+            echo "Loaded testnet wallet credentials from secrets."
+          else
+            echo "Using default repo testnet-wallet.json."
+          fi
+
+      - name: Broadcast 1.0 TON Transfer to User Wallet
+        run: npm run drip:ton
