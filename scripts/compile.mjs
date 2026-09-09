@@ -4,7 +4,7 @@ import path from 'path';
 
 async function main() {
     console.log('Compiling QTON FunC contracts via @ton-community/func-js...');
-    const root = 'C:/Users/marti/Ton-Society-India';
+    const root = process.cwd();
     
     // 1. Wallet
     console.log('Compiling qton_wallet.fc...');
