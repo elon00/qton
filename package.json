@@ -7,6 +7,7 @@
   "scripts": {
     "build": "node scripts/compile.mjs",
     "test": "npx tsx --test tests/qton.spec.ts",
+    "test:onchain": "npx tsx scripts/test-live-onchain.ts",
     "wallet:info": "npx tsx scripts/wallet-info.ts",
     "deploy:testnet": "npx tsx scripts/deploy-testnet.ts",
     "testnet:gate": "npx tsx scripts/testnet-reality-gate.ts",

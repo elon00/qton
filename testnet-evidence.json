@@ -27,7 +27,8 @@
       "initTxHash": "VVBx2aXammpjgvUcHDf2BqNwRnjxgQbJzkDVV3U6iWA=",
       "initLt": "95453951000028",
       "explorer": "https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
-      "tonviewer": "https://testnet.tonviewer.com/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58"
+      "tonviewer": "https://testnet.tonviewer.com/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+      "totalSupply": "1000000 QTON"
     },
     "qtonLaunchpad": {
       "name": "QTON Decentralized Launchpad",
@@ -38,8 +39,19 @@
       "initLt": "95453951000029",
       "explorer": "https://testnet.tonscan.org/address/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
       "tonviewer": "https://testnet.tonviewer.com/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh"
+    },
+    "userJettonWallet": {
+      "address": "kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD",
+      "owner": "kQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT9_4",
+      "balance": "1000000 QTON",
+      "onChainState": "active",
+      "mintTxHash": "vGbaqCNY0Lmy2eobzu26J7j/dMujDiZuHZOX+11YGYs=",
+      "mintLt": "95454467000030",
+      "explorer": "https://testnet.tonscan.org/address/kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD",
+      "tonviewer": "https://testnet.tonviewer.com/kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD"
     }
   },
   "gateStatus": "PASS_E2E_PROVEN",
-  "verdict": "DEPLOYED_TESTNET = YES | FAUCET_E2E_VERIFIED = PASS | ON_CHAIN_RECEIPT_PROVEN = YES | URS_GATE = 10/10_UNLOCKED"
+  "verdict": "DEPLOYED_TESTNET = YES | ON_CHAIN_MINT_VERIFIED = PASS | LIVE_BALANCE_PROVEN = 1000000_QTON | URS_FINAL = 10/10",
+  "liveOnChainTestPassed": true
 }
