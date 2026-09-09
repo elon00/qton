@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-09T13:05:58.846Z",
+  "timestamp": "2026-09-09T13:07:31.319Z",
   "network": "ton-testnet",
   "rpcEndpoint": "https://testnet.toncenter.com/api/v2/jsonRPC",
   "rpcReachable": true,
-  "masterchainSeqno": 83677563,
+  "masterchainSeqno": 83677794,
   "deployerAddress": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
   "deployerBalanceTon": "0",
   "gateStatus": "NOT_PROVEN_YET",
