@@ -133,6 +133,54 @@ describe('QTON (Quantum TON) Full System & TVM Architecture Tests', () => {
         assert.strictEqual(bobData.balance, toNano('700000000'), 'Bob balance should be 700M');
     });
 
+    it('Pillar 1 (Invariant): should reject unauthorized mint from non-admin with exit code 73', async () => {
+        const unauthRes = await qtonMaster.sendMint(alice.getSender(), {
+            toAddress: alice.address,
+            jettonAmount: toNano('1000'),
+            forwardTonAmount: toNano('0.05'),
+            totalTonAmount: toNano('0.2'),
+        });
+        const computePhase = (unauthRes.transactions[1].description as any).computePhase;
+        assert.strictEqual(computePhase.exitCode, 73, 'Unauthorized mint must throw error code 73');
+    });
+
+    it('Pillar 1 (Invariant): should reject transfer when amount exceeds balance with exit code 705', async () => {
+        const aliceWalletAddress = await qtonMaster.getWalletAddress(alice.address);
+        const aliceWallet = blockchain.openContract(QtonWallet.createFromAddress(aliceWalletAddress));
+        const overdraftRes = await aliceWallet.sendTransfer(alice.getSender(), {
+            toAddress: bob.address,
+            jettonAmount: toNano('900000000'), // Alice only has 800M
+            forwardTonAmount: toNano('0.05'),
+            totalTonAmount: toNano('0.2'),
+        });
+        const computePhase = (overdraftRes.transactions[1].description as any).computePhase;
+        assert.strictEqual(computePhase.exitCode, 705, 'Overdraft transfer must throw error code 705');
+    });
+
+    it('Pillar 1 (Invariant): should reject transfer when sender is not wallet owner with exit code 706', async () => {
+        const aliceWalletAddress = await qtonMaster.getWalletAddress(alice.address);
+        const aliceWallet = blockchain.openContract(QtonWallet.createFromAddress(aliceWalletAddress));
+        const wrongSenderRes = await aliceWallet.sendTransfer(bob.getSender(), {
+            toAddress: bob.address,
+            jettonAmount: toNano('100'),
+            forwardTonAmount: toNano('0.05'),
+            totalTonAmount: toNano('0.2'),
+        });
+        const computePhase = (wrongSenderRes.transactions[1].description as any).computePhase;
+        assert.strictEqual(computePhase.exitCode, 706, 'Unauthorized sender must throw error code 706');
+    });
+
+    it('Pillar 1 (Invariant): should verify supply conservation invariant (total_supply === sum of balances)', async () => {
+        const masterData = await qtonMaster.getJettonData();
+        const aliceWalletAddress = await qtonMaster.getWalletAddress(alice.address);
+        const aliceWallet = blockchain.openContract(QtonWallet.createFromAddress(aliceWalletAddress));
+        const aliceData = await aliceWallet.getWalletData();
+        const bobWalletAddress = await qtonMaster.getWalletAddress(bob.address);
+        const bobWallet = blockchain.openContract(QtonWallet.createFromAddress(bobWalletAddress));
+        const bobData = await bobWallet.getWalletData();
+        assert.strictEqual(masterData.totalSupply, aliceData.balance + bobData.balance, 'Total supply must exactly match sum of all circulating balances');
+    });
+
     // 2. Conway Automaton AI Tests
     it('Pillar 2: should execute Conway Automaton AI generation steps and calculate entropy', async () => {
         const automaton = new ConwayAutomatonAI(16, 16, 'deadbeefcafe0123456789abcdef0123456789abcdef0123456789abcdef0123');

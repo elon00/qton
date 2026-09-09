@@ -51,19 +51,31 @@ async function main() {
         allPassed = false;
     }
 
-    // STAGE 3: TVM Sandbox Invariant Tests
-    console.log('\n🧪 [STAGE 3/10] Running TVM Sandbox Invariant Tests...');
+    // STAGE 3: Bit-Exact Contract Identity & Code Hash Invariants
+    console.log('\n🔒 [STAGE 3/12] Verifying Bit-Exact Contract Identity & TVM Code Hashes...');
+    try {
+        const { auditContractIdentities } = await import('./verify-contract-identity');
+        const valid = auditContractIdentities();
+        if (!valid) throw new Error('Contract identity mismatch detected');
+        stages.push({ name: 'Contract Identity', status: 'PASS', note: 'Bit-exact BOC & TVM hashes' });
+    } catch (e: any) {
+        stages.push({ name: 'Contract Identity', status: 'FAIL', note: e.message });
+        allPassed = false;
+    }
+
+    // STAGE 4: TVM Sandbox Invariant Tests
+    console.log('\n🧪 [STAGE 4/12] Running TVM Sandbox Invariant Tests...');
     try {
         execSync('npx tsx --test tests/qton.spec.ts', { stdio: 'pipe' });
-        console.log('   ✅ All 9 TVM sandbox test suites passed cleanly.');
-        stages.push({ name: 'TVM Sandbox Tests', status: 'PASS', note: 'All 9 unit suites verified' });
+        console.log('   ✅ All 13 TVM sandbox invariant test suites passed cleanly.');
+        stages.push({ name: 'TVM Sandbox Tests', status: 'PASS', note: '13 invariant suites verified' });
     } catch (e: any) {
         stages.push({ name: 'TVM Sandbox Tests', status: 'FAIL', note: e.message });
         allPassed = false;
     }
 
-    // STAGE 4: NIST FIPS 204 PQC Cryptographic Tests
-    console.log('\n🛡️ [STAGE 4/10] Auditing NIST FIPS 204 ML-DSA-65 PQC Primitives...');
+    // STAGE 5: NIST FIPS 204 PQC Cryptographic Tests
+    console.log('\n🛡️ [STAGE 5/12] Auditing NIST FIPS 204 ML-DSA-65 PQC Primitives...');
     try {
         execSync('node scripts/audit-crypto.mjs', { stdio: 'pipe' });
         console.log('   ✅ NIST FIPS 204 lattice crypto tests verified (sign, verify, tamper rejection).');
@@ -73,8 +85,19 @@ async function main() {
         allPassed = false;
     }
 
-    // STAGE 5: Conway Cellular Automaton Determinism
-    console.log('\n🧬 [STAGE 5/10] Testing Conway Automaton Deterministic Evolution...');
+    // STAGE 6: NIST FIPS 204 PQC Attack Matrix & Negative Tests
+    console.log('\n⚔️ [STAGE 6/12] Running NIST FIPS 204 PQC Adversarial Attack Matrix...');
+    try {
+        execSync('npx tsx --test tests/pqc-attack-matrix.spec.ts', { stdio: 'pipe' });
+        console.log('   ✅ All 9 PQC adversarial attack vectors rejected cleanly (sign, tampered, wrong signer, replay, expiry, chain).');
+        stages.push({ name: 'PQC Attack Matrix', status: 'PASS', note: '9/9 vectors rejected cleanly' });
+    } catch (e: any) {
+        stages.push({ name: 'PQC Attack Matrix', status: 'FAIL', note: e.message });
+        allPassed = false;
+    }
+
+    // STAGE 7: Conway Cellular Automaton Determinism
+    console.log('\n🧬 [STAGE 7/12] Testing Conway Automaton Deterministic Evolution...');
     try {
         const { ConwayAutomatonAI } = await import('../src/automaton/conway_ai');
         const automaton = new ConwayAutomatonAI(16, 16, 'deadbeefcafebabe0123456789abcdefdeadbeefcafebabe0123456789abcdef');
@@ -90,8 +113,8 @@ async function main() {
         allPassed = false;
     }
 
-    // STAGE 6: Testnet RPC Connectivity & Deployer Wallet
-    console.log('\n📡 [STAGE 6/10] Querying Live TON Testnet RPC...');
+    // STAGE 8: Testnet RPC Connectivity & Deployer Wallet
+    console.log('\n📡 [STAGE 8/12] Querying Live TON Testnet RPC...');
     let rpcAvailable = false;
     let client: TonClient | null = null;
     try {
@@ -105,8 +128,8 @@ async function main() {
         stages.push({ name: 'Testnet RPC', status: 'WARN', note: 'Upstream RPC rate-limit / fallback' });
     }
 
-    // STAGE 7: On-Chain QTON Master Contract State
-    console.log('\n💎 [STAGE 7/10] Auditing On-Chain QTON Master Contract...');
+    // STAGE 9: On-Chain QTON Master Contract State
+    console.log('\n💎 [STAGE 9/12] Auditing On-Chain QTON Master Contract...');
     if (rpcAvailable && client) {
         try {
             await sleep(1200);
@@ -122,8 +145,8 @@ async function main() {
         stages.push({ name: 'QTON Master State', status: 'PASS', note: 'Verified via Evidence Registry' });
     }
 
-    // STAGE 8: On-Chain User Jetton Balance Verification (1,000,000 QTON)
-    console.log('\n🪙 [STAGE 8/10] Auditing User Jetton Wallet Mint Evidence...');
+    // STAGE 10: On-Chain User Jetton Balance Verification (1,000,000 QTON)
+    console.log('\n🪙 [STAGE 10/12] Auditing User Jetton Wallet Mint Evidence...');
     try {
         const reg = JSON.parse(fs.readFileSync(EVIDENCE_FILE, 'utf8'));
         const userWallet = reg.verifiedEntities.userJettonWallet;
@@ -141,8 +164,8 @@ async function main() {
         allPassed = false;
     }
 
-    // STAGE 9: Pure TON Drip Verification
-    console.log('\n💧 [STAGE 9/10] Auditing User Pure TON Balance & Drip Workflow...');
+    // STAGE 11: Pure TON Drip Verification
+    console.log('\n💧 [STAGE 11/12] Auditing User Pure TON Balance & Drip Workflow...');
     try {
         const reg = JSON.parse(fs.readFileSync(EVIDENCE_FILE, 'utf8'));
         const userTon = reg.verifiedEntities.userPersonalWallet;
@@ -155,8 +178,8 @@ async function main() {
         allPassed = false;
     }
 
-    // STAGE 10: Evidence Registry SHA-256 Provenance Sealing
-    console.log('\n🔐 [STAGE 10/10] Sealing Canonical Evidence Provenance Digest...');
+    // STAGE 12: Evidence Registry SHA-256 Provenance Sealing
+    console.log('\n🔐 [STAGE 12/12] Sealing Canonical Evidence Provenance Digest...');
     try {
         const registryContent = fs.readFileSync(EVIDENCE_FILE, 'utf8');
         const hash = crypto.createHash('sha256').update(registryContent).digest('hex');
