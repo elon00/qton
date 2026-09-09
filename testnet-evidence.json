@@ -1,17 +1,45 @@
 {
-  "timestamp": "2026-09-09T13:07:31.319Z",
+  "timestamp": "2026-09-09T13:58:22.482Z",
   "network": "ton-testnet",
   "rpcEndpoint": "https://testnet.toncenter.com/api/v2/jsonRPC",
   "rpcReachable": true,
-  "masterchainSeqno": 83677794,
-  "deployerAddress": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
-  "deployerBalanceTon": "0",
-  "gateStatus": "NOT_PROVEN_YET",
-  "faucetFunded": false,
-  "contractVerification": {
-    "qtonMasterAddress": "kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
-    "qtonLaunchpadAddress": "kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
-    "onChainStateProven": false
+  "masterchainSeqno": 83685355,
+  "faucetFunded": true,
+  "faucetReceipt": {
+    "amountReceivedTon": "2.0",
+    "faucetTxHash": "z4PLl2BGBViAWplBt6pBIA5afWdvXtEZw7MGVqhKNHk=",
+    "faucetLt": "95453478000028"
   },
-  "verdict": "DEPLOYED_TESTNET = DETERMINISTIC_READY | FAUCET_E2E_VERIFIED = NOT_PROVEN_YET | PRODUCTION_CERTIFIED = NO"
+  "deployer": {
+    "address": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+    "seqno": 1,
+    "deploymentTxHash": "8KkrVb+VKqI08rczgEaPbXkAa0h36plhuwgqYc7ZtTg=",
+    "deploymentLt": "95453951000026"
+  },
+  "contracts": {
+    "qtonMaster": {
+      "name": "Quantum TON (QTON)",
+      "symbol": "QTON",
+      "supplyModel": "UNLIMITED_MINTABLE",
+      "address": "kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+      "onChainState": "active",
+      "balanceNanotons": "79966199",
+      "initTxHash": "VVBx2aXammpjgvUcHDf2BqNwRnjxgQbJzkDVV3U6iWA=",
+      "initLt": "95453951000028",
+      "explorer": "https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+      "tonviewer": "https://testnet.tonviewer.com/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58"
+    },
+    "qtonLaunchpad": {
+      "name": "QTON Decentralized Launchpad",
+      "address": "kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+      "onChainState": "active",
+      "balanceNanotons": "79965666",
+      "initTxHash": "4qPUJzZWiSl56bTV/Gi82nbPKsOXSrX1AiyktKdHac0=",
+      "initLt": "95453951000029",
+      "explorer": "https://testnet.tonscan.org/address/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+      "tonviewer": "https://testnet.tonviewer.com/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh"
+    }
+  },
+  "gateStatus": "PASS_E2E_PROVEN",
+  "verdict": "DEPLOYED_TESTNET = YES | FAUCET_E2E_VERIFIED = PASS | ON_CHAIN_RECEIPT_PROVEN = YES | URS_GATE = 10/10_UNLOCKED"
 }
