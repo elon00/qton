@@ -12,6 +12,7 @@
     "deploy:testnet": "npx tsx scripts/deploy-testnet.ts",
     "testnet:gate": "npx tsx scripts/testnet-reality-gate.ts",
     "drip:ton": "npx tsx scripts/send-daily-ton.ts",
+    "reality:all": "npx tsx scripts/reality-all.ts",
     "ui": "node scripts/serve-ui.mjs",
     "audit:crypto": "node scripts/audit-crypto.mjs"
   },

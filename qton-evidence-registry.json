@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "QTON_CANONICAL_EVIDENCE_REGISTRY",
+  "version": "1.0.0",
+  "updatedAt": "2026-09-09T16:48:17.038Z",
+  "standard": "UNIVERSAL_REALITY_SYSTEM_v1.0",
+  "auditVerdict": "REAL_TESTNET_INFRASTRUCTURE_PARTIALLY_VERIFIED",
+  "prototypeMaturityScore": 6,
+  "productionReady": false,
+  "network": {
+    "name": "ton-testnet",
+    "workchain": 0,
+    "rpcEndpoint": "https://testnet.toncenter.com/api/v2/jsonRPC"
+  },
+  "verifiedEntities": {
+    "deployerWallet": {
+      "address": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+      "rawAddress": "0:b62e8e8c66015ef806105fc40dab54012aa493f29af92864789f69a6907c4b83",
+      "version": "WalletContractV4",
+      "status": "REAL_VERIFIED",
+      "onChainConfirmed": true
+    },
+    "qtonMaster": {
+      "name": "Quantum TON Master (TEP-74)",
+      "address": "kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+      "rawAddress": "0:88f32a1175aed4cd048e3b2a6f37fb6b1abccd6f8b4699147d37e4bd2ce1bec1",
+      "status": "REAL_VERIFIED",
+      "mintable": true,
+      "supplyModel": "UNLIMITED_POLICY_BOUNDED",
+      "codeHash": "4fa6b2cbb1816e8e04b4c73f73587b1c313271d78216c528ddbf185c7c1a84f3",
+      "deploymentTxHash": "8KkrVb+VKqI08rczgEaPbXkAa0h36plhuwgqYc7ZtTg=",
+      "initTxHash": "VVBx2aXammpjgvUcHDf2BqNwRnjxgQbJzkDVV3U6iWA=",
+      "explorer": "https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58"
+    },
+    "qtonLaunchpad": {
+      "name": "QTON Decentralized Launchpad",
+      "address": "kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+      "status": "REAL_VERIFIED_DEPLOYED_PRODUCT_BLOCKED",
+      "productUiStatus": "BLOCKED",
+      "initTxHash": "4qPUJzZWiSl56bTV/Gi82nbPKsOXSrX1AiyktKdHac0=",
+      "explorer": "https://testnet.tonscan.org/address/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh"
+    },
+    "userJettonWallet": {
+      "owner": "kQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT9_4",
+      "address": "kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD",
+      "balance": "1000000000000000",
+      "formattedBalance": "1,000,000 QTON",
+      "status": "REAL_VERIFIED",
+      "mintTxHash": "vGbaqCNY0Lmy2eobzu26J7j/dMujDiZuHZOX+11YGYs=",
+      "mintLt": "95454467000030",
+      "explorer": "https://testnet.tonscan.org/address/kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD"
+    },
+    "userPersonalWallet": {
+      "bounceable": "kQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT9_4",
+      "nonBounceable": "0QAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT4I9",
+      "status": "REAL_VERIFIED",
+      "tonBalance": "1.019999987 TON",
+      "dailyDripWorkflow": ".github/workflows/daily-ton-drip.yml",
+      "explorer": "https://testnet.tonscan.org/address/0QAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT4I9"
+    }
+  },
+  "verifiedTransactions": [
+    {
+      "type": "FAUCET_CLAIM",
+      "txHash": "z4PLl2BGBViAWplBt6pBIA5afWdvXtEZw7MGVqhKNHk=",
+      "lt": "95453478000028",
+      "amountTon": "2.0",
+      "recipient": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+      "status": "REAL_VERIFIED"
+    },
+    {
+      "type": "CONTRACT_DEPLOY_BATCH",
+      "txHash": "8KkrVb+VKqI08rczgEaPbXkAa0h36plhuwgqYc7ZtTg=",
+      "lt": "95453951000026",
+      "deployer": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+      "status": "REAL_VERIFIED"
+    },
+    {
+      "type": "JETTON_MINT_ONCHAIN",
+      "txHash": "vGbaqCNY0Lmy2eobzu26J7j/dMujDiZuHZOX+11YGYs=",
+      "lt": "95454467000030",
+      "recipient": "kQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT9_4",
+      "amount": "1000000 QTON",
+      "status": "REAL_VERIFIED"
+    },
+    {
+      "type": "PURE_TON_TRANSFER",
+      "sender": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+      "recipient": "0QAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT4I9",
+      "amountTon": "1.0",
+      "seqnoTransition": "2 -> 3",
+      "status": "REAL_VERIFIED"
+    }
+  ],
+  "sevenLayerArchitecture": {
+    "layer1_qton_jetton": {
+      "classification": "REAL_VERIFIED",
+      "evidence": "On-chain deployed master and user wallet holding 1M QTON"
+    },
+    "layer2_wallet_connect": {
+      "classification": "REAL_VERIFIED",
+      "evidence": "TonConnect v2 manifest & Wallet V4 signing integration"
+    },
+    "layer3_launchpad": {
+      "classification": "BLOCKED",
+      "evidence": "Contract deployed on testnet; UI strictly blocked pending bonding curve verification"
+    },
+    "layer4_conway_intelligence": {
+      "classification": "EXPERIMENTAL",
+      "evidence": "Deterministic B3/S23 cellular automaton engine"
+    },
+    "layer5_pqc_ml_dsa": {
+      "classification": "REAL_VERIFIED_LIBRARY_GATED_ONCHAIN",
+      "evidence": "NIST FIPS 204 ML-DSA-65 test vectors pass; TVM smart contract verification in development"
+    },
+    "layer6_agentic_ai": {
+      "classification": "EXPERIMENTAL",
+      "evidence": "Multi-provider tool dispatch prototype (read-only)"
+    },
+    "layer7_reality_security": {
+      "classification": "REAL_VERIFIED",
+      "evidence": "Universal reality gate and canonical evidence registry"
+    }
+  }
+}
