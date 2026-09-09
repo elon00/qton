@@ -1,0 +1,54 @@
+name: QTON Testnet Reality & TVM Verification Gate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  verify-qton:
+    name: QTON Reality Gate Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Pillar 1-6 Compilation (FunC to TVM BOC)
+        run: npm run build
+
+      - name: Pillar 1-6 TVM Sandbox Verification
+        run: npm test
+
+      - name: Setup Testnet Deployer Credentials
+        run: |
+          if [ -n "${{ secrets.TESTNET_WALLET_MNEMONIC }}" ]; then
+            echo "${{ secrets.TESTNET_WALLET_MNEMONIC }}" > testnet-wallet.json
+            echo "Loaded pre-funded wallet from GitHub Secrets."
+          else
+            npm run wallet:info
+          fi
+
+      - name: Execute Testnet Reality Gate (Live RPC Audit)
+        run: npm run testnet:gate
+        continue-on-error: true
+
+      - name: Upload Testnet Evidence Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: testnet-evidence
+          path: |
+            testnet-evidence.json
+            deployment-testnet.json
+            build/

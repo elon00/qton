@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-09-09T13:05:58.846Z",
+  "network": "ton-testnet",
+  "rpcEndpoint": "https://testnet.toncenter.com/api/v2/jsonRPC",
+  "rpcReachable": true,
+  "masterchainSeqno": 83677563,
+  "deployerAddress": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+  "deployerBalanceTon": "0",
+  "gateStatus": "NOT_PROVEN_YET",
+  "faucetFunded": false,
+  "contractVerification": {
+    "qtonMasterAddress": "kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+    "qtonLaunchpadAddress": "kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+    "onChainStateProven": false
+  },
+  "verdict": "DEPLOYED_TESTNET = DETERMINISTIC_READY | FAUCET_E2E_VERIFIED = NOT_PROVEN_YET | PRODUCTION_CERTIFIED = NO"
+}

@@ -9,6 +9,7 @@
     "test": "npx tsx --test tests/qton.spec.ts",
     "wallet:info": "npx tsx scripts/wallet-info.ts",
     "deploy:testnet": "npx tsx scripts/deploy-testnet.ts",
+    "testnet:gate": "npx tsx scripts/testnet-reality-gate.ts",
     "audit:crypto": "node scripts/audit-crypto.mjs"
   },
   "keywords": [
