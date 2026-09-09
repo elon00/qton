@@ -12,3 +12,15 @@ int op::burn_notification() asm "0x7bdd97de PUSHINT";
 int op::mint() asm "21 PUSHINT";
 int op::change_admin() asm "3 PUSHINT";
 int op::change_content() asm "4 PUSHINT";
+
+;; QTON Timelock & Governance Opcodes
+int op::timelock_propose() asm "0x2b8109ad PUSHINT";
+int op::timelock_approve() asm "0x3e18f2a1 PUSHINT";
+int op::timelock_execute() asm "0x4c2918be PUSHINT";
+int op::timelock_cancel() asm "0x1f74a00b PUSHINT";
+int op::emergency_pause() asm "0x5c723f51 PUSHINT";
+int op::unpause() asm "0x6d942e12 PUSHINT";
+
+;; QTON PQC Gateway Opcodes
+int op::pqc_attest() asm "0x4a91b2c4 PUSHINT";
+

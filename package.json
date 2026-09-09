@@ -6,14 +6,19 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "node scripts/compile.mjs",
-    "test": "npx tsx --test tests/qton.spec.ts",
+    "test": "npx tsx --test tests/qton.spec.ts tests/timelock-governance.spec.ts tests/pqc-gateway.spec.ts",
+    "test:governance": "npx tsx --test tests/timelock-governance.spec.ts",
+    "test:gateway": "npx tsx --test tests/pqc-gateway.spec.ts",
     "test:onchain": "npx tsx scripts/test-live-onchain.ts",
     "wallet:info": "npx tsx scripts/wallet-info.ts",
     "deploy:testnet": "npx tsx scripts/deploy-testnet.ts",
     "testnet:gate": "npx tsx scripts/testnet-reality-gate.ts",
     "drip:ton": "npx tsx scripts/send-daily-ton.ts",
+    "seed:dex": "npx tsx scripts/seed-dex-liquidity.ts",
+    "monitor:health": "npx tsx scripts/monitor-health.ts",
     "reality:all": "npx tsx scripts/reality-all.ts",
     "ui": "node scripts/serve-ui.mjs",
+    "tma": "node scripts/serve-tma.mjs",
     "audit:crypto": "node scripts/audit-crypto.mjs"
   },
   "keywords": [
