@@ -1,108 +1,64 @@
-# 💎 QTON (Quantum TON)
+# 💎 QTON — Quantum TON
 
-> **Reality-Verifiable Intelligent Asset Infrastructure on TON Blockchain**  
-> Guided by the **Universal Reality System (URS)**: Zero Unproven Claims, Strict Fail-Closed Invariants, and Cryptographic Blockchain Evidence.
+> **Reality-first intelligent asset infrastructure on TON.**
+>
+> QTON follows the Universal Reality System (URS): **no proof = no production claim**.
 
----
+## Reality Status — September 2026
 
-## 🏛️ Ecosystem Truth & Reality Verdict
+| Area | Reality status | Evidence / limitation |
+|---|---|---|
+| TON Testnet deployment | 🟢 **VERIFIED** | QTON Master and Launchpad addresses plus deployment/mint transaction evidence are recorded in `docs/TESTNET_E2E_EVIDENCE.md`. |
+| QTON Jetton | 🟢 **TESTNET VERIFIED** | TEP-74 Jetton Master; repository evidence records an initial 1,000,000 QTON mint. |
+| Sandbox contracts | 🟢 **VERIFIED** | TVM invariant suites cover the core contracts and governance/PQC gateway logic. |
+| PQC | 🟡 **PARTIALLY VERIFIED** | ML-DSA-65 is verified at the cryptographic/application layer and a PQC gateway is tested; this README does **not** claim independently audited, mainnet-grade PQC security. |
+| Launchpad | 🟡 **EXPERIMENTAL / TESTNET INFRASTRUCTURE** | Contract/infrastructure exists, but a complete production bonding-curve lifecycle must be independently demonstrated before treating it as a live product. |
+| DEX / market | 🟡 **NOT MARKET-PROVEN** | Integration/AMM logic may be tested, but code and simulations are not evidence of sustained real liquidity, users, volume, or market readiness. |
+| Mainnet | 🔒 **NOT CLAIMED** | No mainnet production launch is claimed by this repository. |
+| Production readiness | 🟡 **NOT INDEPENDENTLY CERTIFIED** | CI/tests and internal reality gates are engineering evidence, not an independent production certification. |
+| Market readiness | 🟡 **NOT PROVEN** | Requires real users, repeated usage, operational monitoring, security review, and applicable legal/compliance work. |
 
-```
-VERDICT: REAL TESTNET INFRASTRUCTURE + PARTIALLY VERIFIED SOFTWARE + BLOCKED PRODUCT SURFACES
-PROTOTYPE MATURITY SCORE: ~6.0 / 10.0 (Infrastructure & Testnet Verification Phase)
-PRIMARY GOAL: Prove One Complete Vertical Before Expanding Surface Scope
-```
+### Current Reality Verdict
 
----
+**QTON is a real TON Testnet project with verified on-chain deployment evidence. It is not represented here as a mainnet-live, independently audited, or market-proven production system.**
 
-## 📊 7-Layer Architecture & Truth Matrix
+## ⛓️ Testnet Evidence
 
-| Layer | Component | Status | Reality Classification | Verifiable Artifact / Live Proof |
-| :--- | :--- | :---: | :--- | :--- |
-| **1. Token Layer** | **QTON Jetton Master (TEP-74)** | 🟢 | `REAL_VERIFIED` (Testnet) | [`kQCI8yoR...`](https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58) (1,000,000 QTON minted) |
-| **2. Wallet Layer** | **TON Connect & Wallet V4** | 🟢 | `REAL_VERIFIED` | Live TON Connect v2 + Telegram Wallet integration |
-| **3. Launchpad** | **Decentralized Incubator** | 🔴 | `BLOCKED` | Contract exists; UI blocked until bonding curve lifecycle is proven |
-| **4. Automaton** | **Conway Cellular Engine** | 🟢 | `EXPERIMENTAL` | Deterministic B3/S23 cellular automaton (Not financial AI) |
-| **5. Cryptography** | **NIST FIPS 204 ML-DSA-65** | 🟡 | `REAL_VERIFIED` (Library) / `ROADMAP` (TVM) | Off-chain lattice proof infrastructure; TVM on-chain verifier in progress |
-| **6. AI Layer** | **Multi-Model Agent Prototype** | 🟡 | `EXPERIMENTAL` | Read-only simulation & prompt dispatcher (No autonomous balance control) |
-| **7. Security Layer**| **Universal Reality Gate** | 🟢 | `REAL_VERIFIED` | `npm run reality:all` + canonical `qton-evidence-registry.json` |
+| Entity | Address | Evidence |
+|---|---|---|
+| QTON Jetton Master | `kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58` | TON Testnet explorer + deployment evidence |
+| QTON Launchpad | `kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh` | TON Testnet explorer + deployment evidence |
+| Deployer | `kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t` | TON Testnet evidence |
+| User Jetton Wallet | `kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD` | Evidence records 1,000,000 QTON |
 
----
+See [`docs/TESTNET_E2E_EVIDENCE.md`](docs/TESTNET_E2E_EVIDENCE.md) for transaction hashes, logical times, and compiled artifact references.
 
-## 🔬 Truth Taxonomy
+## 🔐 PQC Reality
 
-Every feature, metric, and UI element in QTON adheres strictly to this taxonomy:
+QTON uses NIST FIPS 204 ML-DSA-65 through its application/gateway cryptographic layer. The repository contains PQC gateway contracts and sandbox tests, but **passing those tests is not equivalent to an independent cryptographic audit or proof of quantum-resistant security for the entire TON protocol stack**.
 
-* **`REAL_VERIFIED`**: Independently verified on-chain with confirmed block transaction hash and LT.
-* **`REAL_UNVERIFIED`**: Broadcasted or compiled code lacking secondary indexer or state proof.
-* **`EXPERIMENTAL`**: Algorithmic research software running deterministically in sandbox or node.
-* **`SIMULATION`**: Mathematical models or sandbox emulations (never presented as real money).
-* **`ROADMAP`**: Planned architectural specifications not yet implemented or deployed.
-* **`BLOCKED`**: Hazardous or unverified surfaces disabled fail-closed to protect users.
-* **`DATA_UNAVAILABLE`**: Unindexed or unavailable data rendered as `—` or `UNKNOWN`, **never** as fake zeros.
+## 🧪 Verification Taxonomy
 
----
+- `REAL_VERIFIED` — reproducible evidence supports the specific claim.
+- `REAL_UNVERIFIED` — implementation exists but external/state proof is incomplete.
+- `EXPERIMENTAL` — real research software, sandbox logic, or prototype integration.
+- `SIMULATION` — mathematical/modelled behavior; not live execution.
+- `ROADMAP` — planned capability.
+- `BLOCKED` — deliberately prevented from production use until evidence exists.
 
-## ⚡ Deployed On-Chain Testnet Evidence
-
-All contracts below are live, verified, and audited on **TON Testnet**:
-
-| Entity | Address | Live Status | Evidence / Explorer |
-| :--- | :--- | :---: | :--- |
-| **QTON Jetton Master** | `kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58` | Active | [TonScan Testnet](https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58) |
-| **QTON Launchpad** | `kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh` | Active | [TonScan Testnet](https://testnet.tonscan.org/address/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh) |
-| **Deployer Wallet** | `kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t` | Active | [TonScan Testnet](https://testnet.tonscan.org/address/kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t) |
-| **User Jetton Wallet** | `kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD` | 1,000,000 QTON | [TonScan Testnet](https://testnet.tonscan.org/address/kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD) |
-| **User Pure TON Wallet**| `0QAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT4I9` | 1.02 TON | [TonScan Testnet](https://testnet.tonscan.org/address/0QAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT4I9) |
-
----
-
-## 🛡️ Core Verification Principles
-
-### 1. Distinction: Sandbox Verified vs. Testnet Verified
-* **Sandbox Verified**: Tested locally using `@ton/sandbox` emulation (invariants, admin checks, edge cases).
-* **Testnet Verified**: Broadcasted across the live network with Toncenter RPC verification and transaction receipt.
-
-### 2. Issuance Model & Governance
-* Built upon the standard **TEP-74 Jetton** interface (`mintable = true`).
-* Dynamic issuance is subject to epoch emission constraints and multi-signature authorization.
-* Marketing claims of "infinite unmonitored money printing" are rejected; issuance follows bounded cryptographic parameters.
-
-### 3. Conway Deterministic Intelligence
-* Executes standard 2D Conway Cellular Automaton rules (B3/S23).
-* Measures population density and entropy deterministically.
-* Does not claim to be predictive financial AI; it acts as an algorithmic entropy oracle.
-
-### 4. Post-Quantum Cryptography Architecture
-* Implementation of **NIST FIPS 204 (ML-DSA-65 / Dilithium-3)** using `@noble/post-quantum`.
-* Operates at the application & gateway layer to generate quantum-resistant signatures.
-* Smart contract on-chain TVM verification of lattice proofs is under active development.
-
----
-
-## 🚀 Reality Commands
+## 🚀 Verification Commands
 
 ```bash
-# 1. Complete Reality Pipeline (12-Stage Master Audit)
 npm run reality:all
-
-# 2. Compile FunC Contracts to TVM BOC
 npm run build
-
-# 3. TVM Sandbox Invariant Tests
 npm test
-
-# 4. NIST FIPS 204 Cryptographic Audit
 npm run audit:crypto
-
-# 5. Live Testnet On-Chain Verification Gate
 npm run testnet:gate
-
-# 6. Launch Command Center UI
 npm run ui
 ```
 
----
+A passing command proves only what that command actually tests. **CI green ≠ production certification.**
 
-## 📜 License
+## License
+
 Apache-2.0. Copyright (c) 2026 elon00.
