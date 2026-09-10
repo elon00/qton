@@ -32,4 +32,6 @@ jobs:
           fi
 
       - name: Broadcast 1.0 TON Transfer to User Wallet
+        env:
+          TESTNET_WALLET_MNEMONIC: ${{ secrets.TESTNET_WALLET_MNEMONIC }}
         run: npm run drip:ton
