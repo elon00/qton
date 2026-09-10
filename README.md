@@ -22,6 +22,14 @@
 
 **QTON is a real TON Testnet project with verified on-chain deployment evidence. It is not represented here as a mainnet-live, independently audited, or market-proven production system.**
 
+## 📄 Whitepaper
+
+The complete English technical whitepaper is maintained in the repository:
+
+**[QTON Whitepaper](docs/WHITEPAPER.md)**
+
+It documents the architecture, Jetton model, PQC gateway, launchpad direction, reality taxonomy, evidence methodology, security boundaries, roadmap, and current production/market limitations.
+
 ## ⛓️ Testnet Evidence
 
 | Entity | Address | Evidence |
