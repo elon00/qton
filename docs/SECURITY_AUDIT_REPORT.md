@@ -1,6 +1,6 @@
-# QTON Formal Smart Contract Security Audit Report
+# QTON AI Formal Smart Contract Security Audit Report
 
-**Audit Target:** QTON (Quantum TON) Core Protocol Smart Contracts  
+**Audit Target:** QTON AI (Quantum TON AI) Core Protocol Smart Contracts  
 **Network:** TON (The Open Network) Blockchain  
 **Language:** FunC / TVM (TON Virtual Machine)  
 **Standard:** TEP-74 Jetton Standard, NIST FIPS 204 ML-DSA-65 Attestation, 2-of-3 Multisig Timelock Governance  

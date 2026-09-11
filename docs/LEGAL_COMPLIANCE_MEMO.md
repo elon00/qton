@@ -1,7 +1,7 @@
-# QTON Regulatory Classification & Legal Compliance Memorandum
+# QTON AI Regulatory Classification & Legal Compliance Memorandum
 
 **Date:** September 10, 2026  
-**Subject:** Regulatory Status & Compliance Classification of QTON Token  
+**Subject:** Regulatory Status & Compliance Classification of QTON AI Token  
 **Jurisdiction:** Global Decentralized Standard (US Howey, EU MiCA, Singapore MAS Guidelines)  
 **Standard:** TEP-74 Utility Jetton on TON Blockchain  
 
@@ -9,9 +9,9 @@
 
 ## 1. Executive Summary
 
-QTON (Quantum TON) is architected as a **functional utility token and post-quantum cryptographic security layer** designed to facilitate decentralized computational coordination, automated cellular automaton entropy derivation, and launchpad governance on The Open Network (TON). 
+QTON AI (Quantum TON AI) is architected as a **functional utility token and post-quantum cryptographic security layer** designed to facilitate decentralized computational coordination, automated cellular automaton entropy derivation, and launchpad governance on The Open Network (TON). 
 
-Based on established regulatory frameworks, QTON qualifies as a **Utility Token** and does not constitute an investment contract or security.
+Based on established regulatory frameworks, QTON AI qualifies as a **Utility Token** and does not constitute an investment contract or security.
 
 ---
 

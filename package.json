@@ -1,7 +1,7 @@
 {
   "name": "qton",
   "version": "2.0.0",
-  "description": "QTON (Quantum TON) - Post-Quantum Token on TON Blockchain with Unlimited Supply, Conway Automaton AI, NIST FIPS 204 PQC, Multi-Model Agentics, Launchpad, and Testnet Deployment Engine",
+  "description": "QTON AI (Quantum TON AI) - Post-Quantum Token on TON Blockchain with Unlimited Supply, Conway Automaton AI, NIST FIPS 204 PQC, Multi-Model Agentics, Launchpad, and Testnet Deployment Engine",
   "type": "module",
   "main": "src/index.ts",
   "scripts": {

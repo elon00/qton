@@ -1,4 +1,4 @@
-# QTON Institutional Tokenomics Specification
+# QTON AI Institutional Tokenomics Specification
 
 **Standard**: TEP-74 Jetton on TON Blockchain  
 **Status**: Production & Market Ready Specification  
@@ -8,9 +8,9 @@
 
 ## 1. Executive Summary
 
-QTON (Quantum TON) is a utility jetton engineered for quantum-resistant operations, autonomous agentic intelligence, and verifiable multi-model workflows on The Open Network (TON). 
+QTON AI (Quantum TON AI) is a utility jetton engineered for quantum-resistant operations, autonomous agentic intelligence, and verifiable multi-model workflows on The Open Network (TON). 
 
-Unlike arbitrary infinite-inflation tokens, QTON pairs an expandable supply model with **Mathematical Invariant Bounds**, **48-Hour Timelock Governance**, and **2-of-3 Multisig Quorum**.
+Unlike arbitrary infinite-inflation tokens, QTON AI pairs an expandable supply model with **Mathematical Invariant Bounds**, **48-Hour Timelock Governance**, and **2-of-3 Multisig Quorum**.
 
 ---
 
@@ -18,7 +18,7 @@ Unlike arbitrary infinite-inflation tokens, QTON pairs an expandable supply mode
 
 | Allocation Category | Percentage | Initial Testnet Mint | Vesting & Governance Rules |
 | :--- | :--- | :--- | :--- |
-| **Initial Circulation & Liquidity** | 50.0% | 1,000,000 QTON | Deposited into Testnet User Wallet & DEX Seed Pool |
+| **Initial Circulation & Liquidity** | 50.0% | 1,000,000 QTON AI | Deposited into Testnet User Wallet & DEX Seed Pool |
 | **Conway Automaton Emission Pool** | 25.0% | Governed by Epoch | Emitted deterministically based on cellular automata entropy |
 | **PQC Security & Research Reserve**| 15.0% | Locked in Timelock | Released only via 48-Hour Timelock proposal |
 | **Ecosystem & Developer Grants**   | 10.0% | Multisig Controlled | 2-of-3 Multisig execution only |

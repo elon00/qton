@@ -1,4 +1,4 @@
-# QTON On-Chain Testnet E2E Evidence & Explorer Verification
+# QTON AI On-Chain Testnet E2E Evidence & Explorer Verification
 
 **Network:** TON Testnet (The Open Network)  
 **RPC Provider:** `https://testnet.toncenter.com/api/v2/jsonRPC`  
@@ -11,9 +11,9 @@
 
 | Contract Component | On-Chain Address (User Friendly) | Explorer Link | State |
 |---|---|---|---|
-| **QTON Jetton Master** | `kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58` | [TonScan Explorer](https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58) | **Active** |
-| **QTON Launchpad Engine** | `kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh` | [TonScan Explorer](https://testnet.tonscan.org/address/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh) | **Active** |
-| **User Jetton Wallet** | `kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD` | [TonScan Explorer](https://testnet.tonscan.org/address/kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD) | **Active (1,000,000 QTON)** |
+| **QTON AI Jetton Master** | `kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58` | [TonScan Explorer](https://testnet.tonscan.org/address/kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58) | **Active** |
+| **QTON AI Launchpad Engine** | `kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh` | [TonScan Explorer](https://testnet.tonscan.org/address/kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh) | **Active** |
+| **User Jetton Wallet** | `kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD` | [TonScan Explorer](https://testnet.tonscan.org/address/kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD) | **Active (1,000,000 QTON AI)** |
 | **Protocol Deployer** | `kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t` | [TonScan Explorer](https://testnet.tonscan.org/address/kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t) | **Active** |
 
 ---
@@ -33,10 +33,10 @@
    - Tx Hash: `4qPUJzZWiSl56bTV/Gi82nbPKsOXSrX1AiyktKdHac0=`
    - Logical Time (LT): `95453951000029`
 
-4. **1,000,000 QTON Initial Mint Transaction:**
+4. **1,000,000 QTON AI Initial Mint Transaction:**
    - Tx Hash: `vGbaqCNY0Lmy2eobzu26J7j/dMujDiZuHZOX+11YGYs=`
    - Logical Time (LT): `95454467000030`
-   - Verified Balance: `1,000,000.00 QTON`
+   - Verified Balance: `1,000,000.00 QTON AI`
 
 ---
 

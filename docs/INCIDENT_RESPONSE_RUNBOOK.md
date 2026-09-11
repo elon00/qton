@@ -1,6 +1,6 @@
-# QTON Operational Incident Response Runbook
+# QTON AI Operational Incident Response Runbook
 
-**Protocol:** QTON Protocol on TON Blockchain  
+**Protocol:** QTON AI Protocol on TON Blockchain  
 **Scope:** TVM Smart Contracts, Timelock Controller, PQC Gateway, RPC Failover  
 **Classification:** Operational Security Standard Operating Procedure (SOP)  
 

@@ -1,15 +1,15 @@
-# 💎 QTON — Quantum TON
+# 💎 QTON AI — Quantum TON AI
 
 > **Reality-first intelligent asset infrastructure on TON.**
 >
-> QTON follows the Universal Reality System (URS): **no proof = no production claim**.
+> QTON AI follows the Universal Reality System (URS): **no proof = no production claim**.
 
 ## Reality Status — September 2026
 
 | Area | Reality status | Evidence / limitation |
 |---|---|---|
-| TON Testnet deployment | 🟢 **VERIFIED** | QTON Master and Launchpad addresses plus deployment/mint transaction evidence are recorded in `docs/TESTNET_E2E_EVIDENCE.md`. |
-| QTON Jetton | 🟢 **TESTNET VERIFIED** | TEP-74 Jetton Master; repository evidence records an initial 1,000,000 QTON mint. |
+| TON Testnet deployment | 🟢 **VERIFIED** | QTON AI Master and Launchpad addresses plus deployment/mint transaction evidence are recorded in `docs/TESTNET_E2E_EVIDENCE.md`. |
+| QTON AI Jetton | 🟢 **TESTNET VERIFIED** | TEP-74 Jetton Master; repository evidence records an initial 1,000,000 QTON AI mint. |
 | Sandbox contracts | 🟢 **VERIFIED** | TVM invariant suites cover the core contracts and governance/PQC gateway logic. |
 | PQC | 🟡 **PARTIALLY VERIFIED** | ML-DSA-65 is verified at the cryptographic/application layer and a PQC gateway is tested; this README does **not** claim independently audited, mainnet-grade PQC security. |
 | Launchpad | 🟡 **EXPERIMENTAL / TESTNET INFRASTRUCTURE** | Contract/infrastructure exists, but a complete production bonding-curve lifecycle must be independently demonstrated before treating it as a live product. |
@@ -20,13 +20,13 @@
 
 ### Current Reality Verdict
 
-**QTON is a real TON Testnet project with verified on-chain deployment evidence. It is not represented here as a mainnet-live, independently audited, or market-proven production system.**
+**QTON AI is a real TON Testnet project with verified on-chain deployment evidence. It is not represented here as a mainnet-live, independently audited, or market-proven production system.**
 
 ## 📄 Whitepaper
 
 The complete English technical whitepaper is maintained in the repository:
 
-**[QTON Whitepaper](docs/WHITEPAPER.md)**
+**[QTON AI Whitepaper](docs/WHITEPAPER.md)**
 
 It documents the architecture, Jetton model, PQC gateway, launchpad direction, reality taxonomy, evidence methodology, security boundaries, roadmap, and current production/market limitations.
 
@@ -34,16 +34,16 @@ It documents the architecture, Jetton model, PQC gateway, launchpad direction, r
 
 | Entity | Address | Evidence |
 |---|---|---|
-| QTON Jetton Master | `kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58` | TON Testnet explorer + deployment evidence |
-| QTON Launchpad | `kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh` | TON Testnet explorer + deployment evidence |
+| QTON AI Jetton Master | `kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58` | TON Testnet explorer + deployment evidence |
+| QTON AI Launchpad | `kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh` | TON Testnet explorer + deployment evidence |
 | Deployer | `kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t` | TON Testnet evidence |
-| User Jetton Wallet | `kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD` | Evidence records 1,000,000 QTON |
+| User Jetton Wallet | `kQBOeTMOCLcWSfze3GXD56PqtbPWDkg6lqZw_k6BHHt47lBD` | Evidence records 1,000,000 QTON AI |
 
 See [`docs/TESTNET_E2E_EVIDENCE.md`](docs/TESTNET_E2E_EVIDENCE.md) for transaction hashes, logical times, and compiled artifact references.
 
 ## 🔐 PQC Reality
 
-QTON uses NIST FIPS 204 ML-DSA-65 through its application/gateway cryptographic layer. The repository contains PQC gateway contracts and sandbox tests, but **passing those tests is not equivalent to an independent cryptographic audit or proof of quantum-resistant security for the entire TON protocol stack**.
+QTON AI uses NIST FIPS 204 ML-DSA-65 through its application/gateway cryptographic layer. The repository contains PQC gateway contracts and sandbox tests, but **passing those tests is not equivalent to an independent cryptographic audit or proof of quantum-resistant security for the entire TON protocol stack**.
 
 ## 🧪 Verification Taxonomy
 
