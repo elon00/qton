@@ -1,96 +1,94 @@
 /**
- * QTON Operational Telemetry — Multi-RPC Failover Health Monitor
- * Queries redundant RPC endpoints and verifies contract liveness.
+ * QTON Operational Telemetry — TON Testnet health monitor.
+ * Reports only live observations made during this run.
  */
 
 import { Address } from '@ton/core';
 import { TonClient } from '@ton/ton';
 
-interface HealthReport {
-  timestamp: string;
-  endpoints: {
-    name: string;
-    url: string;
-    status: 'HEALTHY' | 'DEGRADED' | 'DOWN';
-    latencyMs: number;
-    lastBlockSeqno?: number;
-  }[];
-  qtonMaster: {
-    address: string;
-    onChainStatus: 'ACTIVE' | 'UNREACHABLE';
-  };
-  overallHealth: 'OPTIMAL' | 'DEGRADED' | 'CRITICAL';
+interface EndpointReport {
+  name: string;
+  url: string;
+  status: 'HEALTHY' | 'DEGRADED';
+  latencyMs: number;
+  lastBlockSeqno?: number;
+  contractState?: string;
+  error?: string;
 }
 
-const ENDPOINTS = [
-  { name: 'Toncenter Testnet', url: 'https://testnet.toncenter.com/api/v2/jsonRPC' },
-  { name: 'TonAPI Testnet', url: 'https://testnet.tonapi.io/v2' },
-];
+const MASTER_ADDRESS =
+  process.env.QTON_MASTER_ADDRESS || 'kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58';
 
-const MASTER_ADDRESS = 'kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58';
+const ENDPOINTS = (process.env.QTON_RPC_ENDPOINTS || 'https://testnet.toncenter.com/api/v2/jsonRPC')
+  .split(',')
+  .map((url) => url.trim())
+  .filter(Boolean)
+  .map((url, index) => ({ name: `TON Testnet RPC ${index + 1}`, url }));
 
-async function checkEndpoint(name: string, url: string) {
+async function checkEndpoint(name: string, url: string): Promise<EndpointReport> {
   const start = Date.now();
   try {
     const client = new TonClient({ endpoint: url });
     const masterInfo = await client.getMasterchainInfo();
-    const latencyMs = Date.now() - start;
+    const contract = await client.getContractState(Address.parse(MASTER_ADDRESS));
     return {
       name,
       url,
-      status: 'HEALTHY' as const,
-      latencyMs,
-      lastBlockSeqno: masterInfo.last.seqno,
-    };
-  } catch (err: any) {
-    return {
-      name,
-      url,
-      status: 'DEGRADED' as const,
+      status: 'HEALTHY',
       latencyMs: Date.now() - start,
+      lastBlockSeqno: masterInfo.last.seqno,
+      contractState: contract.state,
+    };
+  } catch (error: any) {
+    return {
+      name,
+      url,
+      status: 'DEGRADED',
+      latencyMs: Date.now() - start,
+      error: error?.message || String(error),
     };
   }
 }
 
 async function main() {
-  console.log('🏛️ ================================================================');
-  console.log('   QTON OPERATIONAL TELEMETRY & MULTI-RPC HEALTH MONITOR');
-  console.log('================================================================\n');
+  const reports = await Promise.all(ENDPOINTS.map((endpoint) => checkEndpoint(endpoint.name, endpoint.url)));
+  const healthy = reports.filter((report) => report.status === 'HEALTHY');
+  const activeObservations = healthy.filter((report) => report.contractState === 'active');
 
-  const endpointReports = await Promise.all(
-    ENDPOINTS.map((ep) => checkEndpoint(ep.name, ep.url))
-  );
-
-  const healthyCount = endpointReports.filter((r) => r.status === 'HEALTHY').length;
   const overallHealth =
-    healthyCount === endpointReports.length
-      ? 'OPTIMAL'
-      : healthyCount > 0
-      ? 'DEGRADED'
-      : 'CRITICAL';
+    healthy.length === 0
+      ? 'CRITICAL'
+      : activeObservations.length === healthy.length && healthy.length === reports.length
+        ? 'OPTIMAL'
+        : 'DEGRADED';
 
-  const report: HealthReport = {
-    timestamp: new Date().toISOString(),
-    endpoints: endpointReports,
-    qtonMaster: {
-      address: MASTER_ADDRESS,
-      onChainStatus: 'ACTIVE',
-    },
-    overallHealth,
-  };
-
-  console.log('📡 RPC Latency & Status:');
-  for (const ep of endpointReports) {
-    const icon = ep.status === 'HEALTHY' ? '🟢' : '🟡';
-    console.log(`   ${icon} [${ep.name}] Status: ${ep.status} | Latency: ${ep.latencyMs}ms | Seqno: ${ep.lastBlockSeqno || 'N/A'}`);
+  console.log('QTON TON Testnet operational telemetry');
+  console.log('Timestamp:', new Date().toISOString());
+  for (const report of reports) {
+    console.log(JSON.stringify(report));
   }
 
-  console.log(`\n💎 QTON Master Contract: ${report.qtonMaster.address}`);
-  console.log(`   Status: 🟢 ${report.qtonMaster.onChainStatus}`);
-  console.log(`\n📊 Overall Infrastructure Health: ${overallHealth === 'OPTIMAL' ? '🟢 OPTIMAL' : '🟡 DEGRADED'}`);
+  console.log(
+    JSON.stringify(
+      {
+        qtonMaster: MASTER_ADDRESS,
+        activeContractObserved: activeObservations.length > 0,
+        activeObservations: activeObservations.length,
+        healthyEndpoints: healthy.length,
+        configuredEndpoints: reports.length,
+        overallHealth,
+      },
+      null,
+      2
+    )
+  );
+
+  if (healthy.length === 0 || activeObservations.length === 0) {
+    process.exitCode = 1;
+  }
 }
 
-main().catch((err) => {
-  console.error('Fatal telemetry monitor error:', err);
+main().catch((error) => {
+  console.error('Fatal telemetry monitor error:', error);
   process.exit(1);
 });

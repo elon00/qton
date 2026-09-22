@@ -1,37 +1,45 @@
-name: Daily TON Drip Automaton
+name: Explicit TON Testnet Transfer
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # Runs daily at 00:00 UTC
-  workflow_dispatch:     # Allows manual 1-click trigger anytime from GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      recipient:
+        description: 'TON Testnet recipient address'
+        required: true
+        type: string
+      amount_ton:
+        description: 'Testnet TON amount (maximum 1.0)'
+        required: true
+        default: '0.1'
+        type: string
+      confirm:
+        description: 'Type TESTNET_TRANSFER to authorize this testnet transaction'
+        required: true
+        type: string
+
+permissions:
+  contents: read
 
 jobs:
-  drip:
-    name: Execute Daily 1 TON Drip
+  transfer:
+    if: inputs.confirm == 'TESTNET_TRANSFER'
+    name: Explicit TON Testnet Transfer
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install Dependencies
+          node-version: 24
+          cache: npm
+      - name: Install locked dependencies
         run: npm ci
-
-      - name: Configure Testnet Wallet Credentials
-        run: |
-          if [ -n "${{ secrets.TESTNET_WALLET_MNEMONIC }}" ]; then
-            echo "${{ secrets.TESTNET_WALLET_MNEMONIC }}" > testnet-wallet.json
-            echo "Loaded testnet wallet credentials from secrets."
-          else
-            echo "Using default repo testnet-wallet.json."
-          fi
-
-      - name: Broadcast 1.0 TON Transfer to User Wallet
+      - name: Broadcast explicitly authorized testnet transfer
         env:
           TESTNET_WALLET_MNEMONIC: ${{ secrets.TESTNET_WALLET_MNEMONIC }}
-        run: npm run drip:ton
+          QTON_ENABLE_TESTNET_TRANSFER: 'true'
+          QTON_TESTNET_RECIPIENT: ${{ inputs.recipient }}
+          QTON_TESTNET_AMOUNT: ${{ inputs.amount_ton }}
+        run: |
+          test -n "$TESTNET_WALLET_MNEMONIC" || { echo "TESTNET_WALLET_MNEMONIC secret is required"; exit 1; }
+          npm run drip:ton
