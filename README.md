@@ -54,6 +54,18 @@ QTON AI uses NIST FIPS 204 ML-DSA-65 through its application/gateway cryptograph
 - `ROADMAP` — planned capability.
 - `BLOCKED` — deliberately prevented from production use until evidence exists.
 
+## Operational safety controls
+
+Live TON Testnet mutations are opt-in:
+
+- the former scheduled daily TON transfer has been replaced by a manually triggered workflow;
+- testnet transfers require an explicit recipient, bounded amount, wallet secret, and confirmation phrase;
+- live on-chain verification is read-only by default; minting requires `QTON_ENABLE_TESTNET_MINT=true` plus explicit recipient/amount/credentials;
+- deployment broadcasting requires `QTON_ENABLE_TESTNET_DEPLOY=true`;
+- wallet credentials are expected through `TESTNET_WALLET_MNEMONIC`; local credential-file use/generation is disabled unless explicitly enabled for testnet development;
+- `deployment-testnet.json` distinguishes computed addresses, broadcast state, and confirmed-active deployment rather than treating a broadcast as proof of deployment;
+- health monitoring derives contract status from live RPC observations instead of a hard-coded `ACTIVE` value.
+
 ## 🚀 Verification Commands
 
 ```bash
