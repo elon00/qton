@@ -29,7 +29,7 @@ jobs:
           cp ui/index.html _site/index.html
           cp deployment-testnet.json _site/deployment-testnet.json
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
   deploy:
