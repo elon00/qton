@@ -5,7 +5,6 @@ import fs from 'fs';
 import path from 'path';
 
 const RPC_ENDPOINT = 'https://testnet.toncenter.com/api/v2/jsonRPC';
-const WALLET_FILE = path.resolve('testnet-wallet.json');
 const EVIDENCE_FILE = path.resolve('testnet-evidence.json');
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -78,84 +77,92 @@ async function main() {
     console.log(`   Total Incubated Projects: ${totalProjects}`);
     console.log('   ✅ Launchpad Get-Method verification PASSED!');
 
-    // Test 4: Live On-Chain Mint Transaction to User Wallet
-    console.log('\n🧪 Test 4: Executing Live On-Chain Mint of 1,000,000 QTON to User Wallet...');
-    const userWalletRaw = '0:093bf86060c66add42eecc5bfbf76ef3f9682c334040a5cd08467883ac73914f';
-    const userAddress = Address.parse(userWalletRaw);
-    console.log('   Recipient User Wallet:', userAddress.toString({ testOnly: true }));
+    // Optional mutating test: disabled unless explicitly authorized.
+    if (process.env.QTON_ENABLE_TESTNET_MINT === 'true') {
+        const recipientRaw = process.env.QTON_TESTNET_MINT_RECIPIENT?.trim();
+        const mnemonicRaw = process.env.TESTNET_WALLET_MNEMONIC?.trim();
+        const amountRaw = process.env.QTON_TESTNET_MINT_AMOUNT?.trim() || '1000000';
+        const amount = Number(amountRaw);
 
-    const walletData = JSON.parse(fs.readFileSync(WALLET_FILE, 'utf8'));
-    const keyPair = await mnemonicToPrivateKey(walletData.mnemonic);
-    const wallet = WalletContractV4.create({ workchain: 0, publicKey: keyPair.publicKey });
-    const walletContract = client.open(wallet);
+        if (!recipientRaw) throw new Error('QTON_TESTNET_MINT_RECIPIENT is required when minting is enabled');
+        if (!mnemonicRaw) throw new Error('TESTNET_WALLET_MNEMONIC is required when minting is enabled');
+        if (!Number.isFinite(amount) || amount <= 0 || amount > 1_000_000) {
+            throw new Error('QTON_TESTNET_MINT_AMOUNT must be > 0 and <= 1,000,000 QTON');
+        }
 
-    const seqno = await retryTonCall(() => walletContract.getSeqno());
-    console.log(`   Deployer Wallet Seqno: ${seqno}`);
-
-    const mintAmount = toNano('1000000'); // 1 Million QTON
-    const masterMsg = beginCell()
-        .storeUint(0x178d4519, 32) // op::internal_transfer
-        .storeUint(12345, 64)      // query_id
-        .storeCoins(mintAmount)
-        .storeAddress(masterAddress)
-        .storeAddress(wallet.address)
-        .storeCoins(toNano('0.02')) // forward ton amount
-        .storeUint(0, 1)            // forward payload empty
-        .endCell();
-
-    const mintPayload = beginCell()
-        .storeUint(21, 32)          // op::mint
-        .storeUint(12345, 64)
-        .storeAddress(userAddress)
-        .storeCoins(toNano('0.05'))
-        .storeRef(masterMsg)
-        .endCell();
-
-    console.log('   Broadcasting mint message to QTON Master on TON Testnet...');
-    await retryTonCall(() =>
-        walletContract.sendTransfer({
-            secretKey: keyPair.secretKey,
-            seqno,
-            sendMode: SendMode.PAY_GAS_SEPARATELY,
-            messages: [
-                internal({
-                    to: masterAddress,
-                    value: toNano('0.1'),
-                    bounce: true,
-                    body: mintPayload,
-                }),
-            ],
-        })
-    );
-
-    console.log('   ⏳ Polling for on-chain mint inclusion...');
-    let mintConfirmed = false;
-    for (let i = 0; i < 8; i++) {
-        await sleep(4000);
-        let curSeqno = 0;
+        let mnemonic: string[];
         try {
-            curSeqno = await retryTonCall(() => walletContract.getSeqno());
+            const parsed = JSON.parse(mnemonicRaw);
+            mnemonic = Array.isArray(parsed) ? parsed : parsed.mnemonic;
         } catch {
-            curSeqno = 0;
+            mnemonic = mnemonicRaw.split(/\s+/);
         }
-        console.log(`      ... Poll [${i + 1}/8] -> Seqno: ${curSeqno}`);
-        if (curSeqno > seqno) {
-            mintConfirmed = true;
-            break;
+        if (!Array.isArray(mnemonic) || mnemonic.length < 12) {
+            throw new Error('TESTNET_WALLET_MNEMONIC is invalid');
         }
-    }
 
-    if (mintConfirmed) {
-        console.log('   🎉 LIVE ON-CHAIN MINT CONFIRMED ON TON TESTNET!');
-        const updatedData = await retryTonCall(() => client.runMethod(masterAddress, 'get_jetton_data'));
-        const newSupply = updatedData.stack.readBigNumber();
-        console.log(`   Updated Master Total Supply: ${fromNano(newSupply)} QTON`);
+        const userAddress = Address.parse(recipientRaw);
+        const keyPair = await mnemonicToPrivateKey(mnemonic);
+        const wallet = WalletContractV4.create({ workchain: 0, publicKey: keyPair.publicKey });
+        const walletContract = client.open(wallet);
+        const seqno = await retryTonCall(() => walletContract.getSeqno());
+        const mintAmount = toNano(amountRaw);
+
+        console.log(`\n🧪 Optional mutating test: minting ${amountRaw} QTON to ${userAddress.toString({ testOnly: true })}`);
+
+        const masterMsg = beginCell()
+            .storeUint(0x178d4519, 32)
+            .storeUint(Date.now(), 64)
+            .storeCoins(mintAmount)
+            .storeAddress(masterAddress)
+            .storeAddress(wallet.address)
+            .storeCoins(toNano('0.02'))
+            .storeUint(0, 1)
+            .endCell();
+
+        const mintPayload = beginCell()
+            .storeUint(21, 32)
+            .storeUint(Date.now(), 64)
+            .storeAddress(userAddress)
+            .storeCoins(toNano('0.05'))
+            .storeRef(masterMsg)
+            .endCell();
+
+        await retryTonCall(() =>
+            walletContract.sendTransfer({
+                secretKey: keyPair.secretKey,
+                seqno,
+                sendMode: SendMode.PAY_GAS_SEPARATELY,
+                messages: [
+                    internal({
+                        to: masterAddress,
+                        value: toNano('0.1'),
+                        bounce: true,
+                        body: mintPayload,
+                    }),
+                ],
+            })
+        );
+
+        let mintConfirmed = false;
+        for (let i = 0; i < 8; i++) {
+            await sleep(4000);
+            const currentSeqno = await retryTonCall(() => walletContract.getSeqno());
+            if (currentSeqno > seqno) {
+                mintConfirmed = true;
+                break;
+            }
+        }
+        if (!mintConfirmed) {
+            throw new Error('mint was submitted but confirmation was not observed within the polling window');
+        }
+        console.log('   ✅ Explicitly authorized testnet mint transaction confirmed.');
     } else {
-        console.log('   ⚠️ Mint message sent, pending block confirmation.');
+        console.log('\nℹ️ Mutating mint test skipped. Set QTON_ENABLE_TESTNET_MINT=true plus explicit recipient and wallet secret to enable it.');
     }
 
     console.log('\n========================================================');
-    console.log('✅ ALL ON-CHAIN SMART CONTRACT TESTS COMPLETED & PROVEN!');
+    console.log('✅ READ-ONLY ON-CHAIN CONTRACT CHECKS COMPLETED; MUTATION IS EXPLICITLY OPT-IN');
     console.log('========================================================\n');
 }
 
