@@ -31,18 +31,19 @@ jobs:
       - name: Pillar 1-6 TVM Sandbox Verification
         run: npm test
 
-      - name: Setup Testnet Deployer Credentials
-        run: |
-          if [ -n "${{ secrets.TESTNET_WALLET_MNEMONIC }}" ]; then
-            echo "${{ secrets.TESTNET_WALLET_MNEMONIC }}" > testnet-wallet.json
-            echo "Loaded pre-funded wallet from GitHub Secrets."
-          else
-            npm run wallet:info
-          fi
-
       - name: Execute Testnet Reality Gate (Live RPC Audit)
-        run: npm run testnet:gate
-        continue-on-error: true
+        env:
+          TESTNET_WALLET_MNEMONIC: ${{ secrets.TESTNET_WALLET_MNEMONIC }}
+        run: |
+          if [ -z "$TESTNET_WALLET_MNEMONIC" ]; then
+            echo "::notice::Live testnet gate skipped because TESTNET_WALLET_MNEMONIC is not configured."
+            exit 0
+          fi
+          npm run testnet:gate
+
+      - name: Remove legacy local wallet material
+        if: always()
+        run: rm -f testnet-wallet.json
 
       - name: Upload Testnet Evidence Artifact
         uses: actions/upload-artifact@v7
