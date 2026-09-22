@@ -72,12 +72,29 @@ async function runTestnetGate() {
 
     // 2. Load Deployer Wallet Credentials
     console.log('\n🔑 Step 2: Inspecting Deployer Wallet credentials...');
-    if (!fs.existsSync(WALLET_FILE)) {
-        console.error('❌ testnet-wallet.json not found! Run npm run wallet:info first.');
+    const secretMnemonic = process.env.TESTNET_WALLET_MNEMONIC?.trim();
+    let mnemonic: string[];
+
+    if (secretMnemonic) {
+        try {
+            const parsed = JSON.parse(secretMnemonic);
+            mnemonic = Array.isArray(parsed) ? parsed : parsed?.mnemonic;
+        } catch {
+            mnemonic = secretMnemonic.split(/\s+/).filter(Boolean);
+        }
+    } else if (fs.existsSync(WALLET_FILE)) {
+        const walletData = JSON.parse(fs.readFileSync(WALLET_FILE, 'utf8'));
+        mnemonic = walletData.mnemonic;
+    } else {
+        console.error('❌ No testnet wallet credential configured.');
         process.exit(1);
     }
-    const walletData = JSON.parse(fs.readFileSync(WALLET_FILE, 'utf8'));
-    const keyPair = await mnemonicToPrivateKey(walletData.mnemonic);
+
+    if (!Array.isArray(mnemonic) || mnemonic.length !== 24 || mnemonic.some(word => typeof word !== 'string' || !word.trim())) {
+        throw new Error('TESTNET_WALLET_MNEMONIC must contain exactly 24 mnemonic words');
+    }
+
+    const keyPair = await mnemonicToPrivateKey(mnemonic);
     const wallet = WalletContractV4.create({ workchain: 0, publicKey: keyPair.publicKey });
     const deployerAddress = wallet.address.toString({ testOnly: true });
     console.log('📍 Deployer Address:', deployerAddress);
