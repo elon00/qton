@@ -23,10 +23,10 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci
-      - name: Unit and adversarial tests
-        run: npm test
       - name: Build contracts
         run: npm run build
+      - name: Unit and adversarial tests
+        run: npm test
       - name: Repository security audit
         run: npm run audit:security
       - name: Cryptographic audit
