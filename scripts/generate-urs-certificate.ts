@@ -57,18 +57,18 @@ const certificatePayload = {
     E_ExecutionReality: 1.0,
     I_InputReality: 1.0,
     O_OutputImpact: 1.0,
-    V_IndependentVerification: 1.0,
+    V_IndependentVerification: 0.0,
     R_Reproducibility: 1.0,
     C_ClaimHonesty: 1.0,
     P_Provenance: 1.0,
     F_FailClosedSafety: 1.0,
     A_AdversarialSecurity: 1.0,
-    H_HumanExternalAudit: 0.60
+    H_HumanExternalAudit: 0.0
   },
   automatedScore: 10.0,
-  weakestLinkScore: 6.0,
-  weakestLinkDimension: 'H_HumanExternalAudit',
-  status: 'PRODUCTION_VERIFIED'
+  weakestLinkScore: 0.0,
+  weakestLinkDimension: 'V/H_Independent_External_Verification',
+  status: 'INTERNAL_TESTNET_VERIFICATION_ONLY'
 };
 
 const payloadBytes = Buffer.from(JSON.stringify(certificatePayload, null, 2));
