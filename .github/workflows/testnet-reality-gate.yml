@@ -31,15 +31,6 @@ jobs:
       - name: Pillar 1-6 TVM Sandbox Verification
         run: npm test
 
-      - name: Setup Testnet Deployer Credentials
-        run: |
-          if [ -n "${{ secrets.TESTNET_WALLET_MNEMONIC }}" ]; then
-            echo "${{ secrets.TESTNET_WALLET_MNEMONIC }}" > testnet-wallet.json
-            echo "Loaded pre-funded wallet from GitHub Secrets."
-          else
-            npm run wallet:info
-          fi
-
       - name: Execute Testnet Reality Gate (Live RPC Audit)
         env:
           TESTNET_WALLET_MNEMONIC: ${{ secrets.TESTNET_WALLET_MNEMONIC }}
@@ -50,7 +41,7 @@ jobs:
           fi
           npm run testnet:gate
 
-      - name: Remove testnet wallet material
+      - name: Remove legacy local wallet material
         if: always()
         run: rm -f testnet-wallet.json
 
