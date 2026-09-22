@@ -41,8 +41,18 @@ jobs:
           fi
 
       - name: Execute Testnet Reality Gate (Live RPC Audit)
-        run: npm run testnet:gate
-        continue-on-error: true
+        env:
+          TESTNET_WALLET_MNEMONIC: ${{ secrets.TESTNET_WALLET_MNEMONIC }}
+        run: |
+          if [ -z "$TESTNET_WALLET_MNEMONIC" ]; then
+            echo "::notice::Live testnet gate skipped because TESTNET_WALLET_MNEMONIC is not configured."
+            exit 0
+          fi
+          npm run testnet:gate
+
+      - name: Remove testnet wallet material
+        if: always()
+        run: rm -f testnet-wallet.json
 
       - name: Upload Testnet Evidence Artifact
         uses: actions/upload-artifact@v7
