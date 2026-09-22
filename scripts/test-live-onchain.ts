@@ -1,5 +1,5 @@
 import { TonClient, WalletContractV4 } from '@ton/ton';
-import { Address, Cell, toNano, fromNano, internal, SendMode, beginCell } from '@ton/core';
+import { Address, toNano, fromNano, internal, SendMode, beginCell } from '@ton/core';
 import { mnemonicToPrivateKey } from '@ton/crypto';
 import fs from 'fs';
 import path from 'path';
