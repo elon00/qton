@@ -1,6 +1,6 @@
 import { mnemonicNew, mnemonicToPrivateKey } from '@ton/crypto';
 import { TonClient, WalletContractV4 } from '@ton/ton';
-import { Cell, toNano, fromNano, internal, SendMode } from '@ton/core';
+import { Address, Cell, toNano, fromNano, internal, SendMode } from '@ton/core';
 import { QtonMaster } from '../src/contracts/QtonMaster';
 import { QtonLaunchpad } from '../src/contracts/QtonLaunchpad';
 import { buildOnchainMetadata } from '../src/utils/jetton-content';
@@ -12,6 +12,9 @@ const WALLET_FILE = path.resolve('mainnet-wallet.json');
 const DEPLOYMENT_FILE = path.resolve('deployment-mainnet.json');
 const RPC_ENDPOINT = process.env.QTON_MAINNET_RPC || 'https://toncenter.com/api/v2/jsonRPC';
 const MIN_DEPLOY_BALANCE = toNano('0.25');
+const OWNER_ADMIN_ADDRESS = Address.parse(
+  process.env.QTON_OWNER_ADDRESS || 'UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3'
+);
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -80,19 +83,30 @@ async function main() {
   let balance = 0n;
   let accountState = 'uninitialized';
   try {
-    const info = await client.getWalletInformation(wallet.address);
-    balance = BigInt(info.balance);
-    accountState = info.state;
+    const res = await fetch(`https://toncenter.com/api/v2/getAddressInformation?address=${deployerRaw}`);
+    const data = await res.json() as any;
+    if (data?.ok && data?.result) {
+      balance = BigInt(data.result.balance || 0);
+      accountState = data.result.state || 'uninitialized';
+    }
   } catch (e: any) {
-    // Uninitialized wallet returns empty/error
+    try {
+      const info = await client.getWalletInformation(wallet.address);
+      balance = BigInt(info.balance);
+      accountState = info.state;
+    } catch {}
   }
+
+  const ownerBounceable = OWNER_ADMIN_ADDRESS.toString({ testOnly: false, bounceable: true });
+  const ownerNonBounceable = OWNER_ADMIN_ADDRESS.toString({ testOnly: false, bounceable: false });
 
   console.log('📍 Deployer Address (Bounceable):    ', deployerBounceable);
   console.log('📍 Deployer Address (Non-Bounceable):', deployerNonBounceable);
-  console.log('💰 Mainnet Balance:                  ', fromNano(balance), 'TON');
+  console.log('👑 Permanent Owner / Admin Wallet:   ', ownerNonBounceable);
+  console.log('💰 Deployer Mainnet Balance:         ', fromNano(balance), 'TON');
   console.log('📊 On-Chain State:                   ', accountState);
-  console.log('🔍 TonScan Explorer:                 ', 'https://tonscan.org/address/' + deployerBounceable);
-  console.log('🔍 Tonviewer:                        ', 'https://tonviewer.com/' + deployerBounceable);
+  console.log('🔍 TonScan Explorer (Deployer):      ', 'https://tonscan.org/address/' + deployerBounceable);
+  console.log('🔍 TonScan Explorer (Owner Admin):   ', 'https://tonscan.org/address/' + ownerBounceable);
 
   // Load compiled FunC BOCs
   const masterCode = Cell.fromBase64(fs.readFileSync(path.resolve('build/qton_master.boc.b64'), 'utf8'));
@@ -109,7 +123,7 @@ async function main() {
   const qtonMaster = QtonMaster.createFromConfig(
     {
       totalSupply: 0n,
-      adminAddress: wallet.address,
+      adminAddress: OWNER_ADMIN_ADDRESS,
       content,
       walletCode,
     },
@@ -118,7 +132,7 @@ async function main() {
 
   const qtonLaunchpad = QtonLaunchpad.createFromConfig(
     {
-      adminAddress: wallet.address,
+      adminAddress: OWNER_ADMIN_ADDRESS,
       totalProjects: 0,
     },
     launchpadCode
@@ -162,6 +176,11 @@ async function main() {
         currentBalanceTon: fromNano(balance),
         requiredMinTon: fromNano(MIN_DEPLOY_BALANCE),
         recommendedFundTon: '0.3',
+      },
+      ownerAdmin: {
+        addressBounceable: ownerBounceable,
+        addressNonBounceable: ownerNonBounceable,
+        role: 'Permanent Contract Admin & Unlimited Mint Authority'
       },
       contracts: {
         qtonMaster: {

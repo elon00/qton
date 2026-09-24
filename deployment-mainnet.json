@@ -12,24 +12,29 @@
     "requiredMinTon": "0.25",
     "recommendedFundTon": "0.3"
   },
+  "ownerAdmin": {
+    "addressBounceable": "EQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT2Ry",
+    "addressNonBounceable": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
+    "role": "Permanent Contract Admin & Unlimited Mint Authority"
+  },
   "contracts": {
     "qtonMaster": {
-      "predictedAddressBounceable": "EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
-      "predictedAddressNonBounceable": "UQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESPFk",
+      "predictedAddressBounceable": "EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
+      "predictedAddressNonBounceable": "UQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW--k",
       "name": "Quantum TON (QTON)",
       "symbol": "QTON",
       "supplyModel": "UNLIMITED_MINTABLE",
-      "explorer": "https://tonscan.org/address/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
-      "tonviewer": "https://tonviewer.com/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh"
+      "explorer": "https://tonscan.org/address/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
+      "tonviewer": "https://tonviewer.com/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh"
     },
     "qtonLaunchpad": {
-      "predictedAddressBounceable": "EQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDpdE",
-      "predictedAddressNonBounceable": "UQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDsqB",
+      "predictedAddressBounceable": "EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
+      "predictedAddressNonBounceable": "UQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabgMT",
       "name": "QTON Decentralized Launchpad",
-      "explorer": "https://tonscan.org/address/EQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDpdE",
-      "tonviewer": "https://tonviewer.com/EQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDpdE"
+      "explorer": "https://tonscan.org/address/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
+      "tonviewer": "https://tonviewer.com/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W"
     }
   },
   "paymentDeepLink": "ton://transfer/UQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKsaa?amount=300000000&text=Fund%20QTON%20Mainnet%20Deployer",
-  "updatedAt": "2026-09-24T18:01:56.290Z"
+  "updatedAt": "2026-09-24T18:05:16.366Z"
 }
