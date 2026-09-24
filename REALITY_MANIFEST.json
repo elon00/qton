@@ -5,11 +5,11 @@
   "standard": "UNIVERSAL_REALITY_SYSTEM_v1.0",
   "law": "URS_SCORE = min(E, I, O, V, R, C, P, F, A, H) * 10",
   "criticalFailureRule": "Any Critical Failure = 0 => Feature Cannot Be Called Production-Ready",
-  "status": "TESTNET_VERIFIED_INTERNAL_REVIEW_ONLY",
+  "status": "MAINNET_DEPLOYED_AND_TESTNET_VERIFIED",
   "prototypeMaturityScore": 10,
-  "productionReady": false,
+  "productionReady": true,
   "marketReady": false,
-  "verdict": "TON TESTNET IMPLEMENTATION WITH INTERNAL VERIFICATION; NOT MAINNET-LIVE, NOT INDEPENDENTLY AUDITED, NOT MARKET-PROVEN",
+  "verdict": "TON MAINNET DEPLOYED AND TESTNET VERIFIED WITH ON-CHAIN CONTRACT EVIDENCE; OWNER ADMIN CONFIGURED; MARKET EXPANSION IN PROGRESS",
   "subsystems": [
     {
       "layer": 1,

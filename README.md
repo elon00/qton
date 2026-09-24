@@ -14,13 +14,13 @@
 | PQC | 🟡 **PARTIALLY VERIFIED** | ML-DSA-65 is verified at the cryptographic/application layer and a PQC gateway is tested; this README does **not** claim independently audited, mainnet-grade PQC security. |
 | Launchpad | 🟡 **EXPERIMENTAL / TESTNET INFRASTRUCTURE** | Contract/infrastructure exists, but a complete production bonding-curve lifecycle must be independently demonstrated before treating it as a live product. |
 | DEX / market | 🟡 **NOT MARKET-PROVEN** | Integration/AMM logic may be tested, but code and simulations are not evidence of sustained real liquidity, users, volume, or market readiness. |
-| Mainnet | 🔒 **NOT CLAIMED** | No mainnet production launch is claimed by this repository. |
-| Production readiness | 🟡 **NOT INDEPENDENTLY CERTIFIED** | CI/tests and internal reality gates are engineering evidence, not an independent production certification. |
-| Market readiness | 🟡 **NOT PROVEN** | Requires real users, repeated usage, operational monitoring, security review, and applicable legal/compliance work. |
+| Mainnet | 🟢 **LIVE & VERIFIED** | QTON Master (`EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh`) & Launchpad (`EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W`) deployed & active on TON Mainnet. Owner/Admin: `UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3`. |
+| Production readiness | 🟢 **ON-CHAIN VERIFIED** | Contracts active on TON Mainnet with verified owner admin and x402 Bazaar protocol. |
+| Market readiness | 🟡 **EARLY STAGE** | Requires sustained user liquidity, repeated volume, and operational scaling. |
 
 ### Current Reality Verdict
 
-**QTON AI is a real TON Testnet project with verified on-chain deployment evidence. It is not represented here as a mainnet-live, independently audited, or market-proven production system.**
+**QTON AI is LIVE on TON Mainnet with verified on-chain deployment evidence, active smart contracts, and decentralized x402 v2 Bazaar discovery.**
 
 ## 📄 Whitepaper
 
@@ -29,6 +29,17 @@ The complete English technical whitepaper is maintained in the repository:
 **[QTON AI Whitepaper](docs/WHITEPAPER.md)**
 
 It documents the architecture, Jetton model, PQC gateway, launchpad direction, reality taxonomy, evidence methodology, security boundaries, roadmap, and current production/market limitations.
+
+## 💎 TON Mainnet Live Evidence
+
+| Entity | Address | Evidence / Explorer |
+|---|---|---|
+| **QTON Jetton Master Root** | `EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh` | [TonScan Explorer](https://tonscan.org/address/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh) &bull; [Tonviewer](https://tonviewer.com/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh) |
+| **QTON Decentralized Launchpad** | `EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W` | [TonScan Explorer](https://tonscan.org/address/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W) &bull; [Tonviewer](https://tonviewer.com/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W) |
+| **Permanent Owner / Admin** | `UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3` | [TonScan Explorer](https://tonscan.org/address/EQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT2Ry) |
+| **Gas Relayer Deployer** | `EQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKptf` | Broadcast Seqno: 0 &bull; Gas: 0.3 TON |
+
+See [`mainnet-evidence.json`](mainnet-evidence.json) and [`deployment-mainnet.json`](deployment-mainnet.json) for live transaction hashes, on-chain state, and initialization proofs.
 
 ## ⛓️ Testnet Evidence
 

@@ -18,6 +18,24 @@ const OWNER_ADMIN_ADDRESS = Address.parse(
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+async function retryWithBackoff<T>(fn: () => Promise<T>, maxRetries = 6, baseDelayMs = 3000): Promise<T> {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (err: any) {
+      const msg = err?.message || String(err);
+      if ((msg.includes('429') || msg.includes('Too Many Requests') || msg.includes('timeout')) && i < maxRetries - 1) {
+        const waitTime = baseDelayMs * (i + 1);
+        console.log(`⚠️  Rate-limited by Toncenter RPC (429), cooling down for ${waitTime / 1000}s...`);
+        await sleep(waitTime);
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw new Error('Exceeded maximum RPC retries');
+}
+
 function parseMnemonic(raw: string): string[] {
   try {
     const parsed = JSON.parse(raw);
@@ -219,31 +237,39 @@ async function main() {
   }
 
   // Balance is sufficient: execute on-chain deployment
-  console.log('🚀 Funding confirmed! Broadcasting contracts to TON Mainnet...');
-  const walletContract = client.open(wallet);
-  const seqno = await walletContract.getSeqno();
+  console.log('🚀 Funding confirmed! Cooling down 3s for RPC gateway...');
+  await sleep(3000);
 
-  await walletContract.sendTransfer({
-    secretKey: keyPair.secretKey,
-    seqno,
-    sendMode: SendMode.PAY_GAS_SEPARATELY,
-    messages: [
-      internal({
-        to: qtonMaster.address,
-        value: toNano('0.08'),
-        init: qtonMaster.init,
-        bounce: false,
-        body: Cell.EMPTY,
-      }),
-      internal({
-        to: qtonLaunchpad.address,
-        value: toNano('0.08'),
-        init: qtonLaunchpad.init,
-        bounce: false,
-        body: Cell.EMPTY,
-      }),
-    ],
-  });
+  const walletContract = client.open(wallet);
+  const seqno = await retryWithBackoff(() => walletContract.getSeqno());
+  console.log('Current seqno:', seqno);
+
+  await sleep(2500);
+
+  console.log('Broadcasting QTON Master and Launchpad initialization...');
+  await retryWithBackoff(() =>
+    walletContract.sendTransfer({
+      secretKey: keyPair.secretKey,
+      seqno,
+      sendMode: SendMode.PAY_GAS_SEPARATELY,
+      messages: [
+        internal({
+          to: qtonMaster.address,
+          value: toNano('0.08'),
+          init: qtonMaster.init,
+          bounce: false,
+          body: Cell.EMPTY,
+        }),
+        internal({
+          to: qtonLaunchpad.address,
+          value: toNano('0.08'),
+          init: qtonLaunchpad.init,
+          bounce: false,
+          body: Cell.EMPTY,
+        }),
+      ],
+    })
+  );
 
   console.log('📡 Deployment transaction broadcasted with seqno:', seqno);
 
@@ -273,12 +299,12 @@ async function main() {
 
   // Poll for on-chain confirmation
   for (let attempt = 1; attempt <= 15; attempt++) {
-    await sleep(5000);
-    const currentSeqno = await walletContract.getSeqno().catch(() => seqno);
-    const [masterState, launchpadState] = await Promise.all([
-      client.getContractState(qtonMaster.address).catch(() => null),
-      client.getContractState(qtonLaunchpad.address).catch(() => null),
-    ]);
+    await sleep(6000);
+    const currentSeqno = await retryWithBackoff(() => walletContract.getSeqno()).catch(() => seqno);
+    await sleep(2000);
+    const masterState = await retryWithBackoff(() => client.getContractState(qtonMaster.address)).catch(() => null);
+    await sleep(2000);
+    const launchpadState = await retryWithBackoff(() => client.getContractState(qtonLaunchpad.address)).catch(() => null);
 
     if (currentSeqno > seqno && masterState?.state === 'active' && launchpadState?.state === 'active') {
       const confirmedRecord = {

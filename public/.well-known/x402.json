@@ -7,12 +7,13 @@
   "provider": {
     "name": "QTON AI / Martin",
     "website": "https://elon00.github.io/qton/",
-    "payTo": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+    "payTo": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
+    "ownerAdmin": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
     "unifiedOwner": "BPshPrMazV7qunhcq18AvCHjSceHbKytiRDNrtCv68g3",
-    "network": "ton-testnet",
-    "caip2": "ton:-3",
-    "smartContract": "kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
-    "launchpad": "kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+    "network": "ton-mainnet",
+    "caip2": "ton:-239",
+    "smartContract": "EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
+    "launchpad": "EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
     "currency": "TON",
     "supplyPolicy": "UNCAPPED_ELASTIC"
   },
@@ -24,10 +25,10 @@
       "accepts": [
         {
           "scheme": "exact",
-          "network": "ton:-3",
+          "network": "ton:-239",
           "amount": "10000000",
           "asset": "native",
-          "payTo": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+          "payTo": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
           "maxTimeoutSeconds": 60,
           "extra": {
             "name": "TON",
@@ -68,10 +69,10 @@
       "accepts": [
         {
           "scheme": "exact",
-          "network": "ton:-3",
+          "network": "ton:-239",
           "amount": "10000000",
           "asset": "native",
-          "payTo": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+          "payTo": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
           "maxTimeoutSeconds": 60,
           "extra": {
             "name": "TON",
