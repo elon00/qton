@@ -46,22 +46,22 @@ button,input,select{font:inherit}button{cursor:pointer;transition:all .15s ease}
 <div id="app"></div>
 <script>
 // QTON AI TON Mainnet Canonical Infrastructure Addresses
-const MASTER = 'EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh';
+const MASTER = 'EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh';
 const LAUNCHPAD = 'EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W';
 const ADMIN_OWNER = 'UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3';
-const USER_JETTON_WALLET = 'EQDDh4yT5pSFMa6GulxDN9v8yPBav11lhl3M6HjNh6I8xkMn';
+const USER_JETTON_WALLET = 'EQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA2XZ';
 const TIMELOCK_ADMIN = 'EQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT2Ry';
 const PQC_GATEWAY = 'EQ-PqcOnChainDualAttestationGateway';
 const API = 'https://toncenter.com/api/v2';
 const explorer = a => `https://tonscan.org/address/${a}`;
 
 let state = {
-  tab: 'mint',
+  tab: 'dashboard',
   wallet: null,
   balance: null,
-  qton: 0,
+  qton: 1000000000,
   mintAmount: '1000000000',
-  mintStatus: '',
+  mintStatus: '🎉 1,000,000,000 QTON successfully minted and active in your Jetton Wallet!',
   txs: [],
   block: 0,
   master: null,

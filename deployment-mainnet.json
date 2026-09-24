@@ -4,20 +4,26 @@
   "caip2": "ton:-239",
   "rpcEndpoint": "https://toncenter.com/api/v2/jsonRPC",
   "status": "CONFIRMED_ACTIVE_ON_MAINNET",
-  "deployer": "EQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKptf",
   "contracts": {
     "qtonMaster": {
-      "address": "EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
-      "explorer": "https://tonscan.org/address/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
-      "tonviewer": "https://tonviewer.com/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh"
+      "address": "EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
+      "explorer": "https://tonscan.org/address/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
+      "tonviewer": "https://tonviewer.com/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh"
     },
     "qtonLaunchpad": {
       "address": "EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
       "explorer": "https://tonscan.org/address/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
       "tonviewer": "https://tonviewer.com/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W"
+    },
+    "userJettonWallet": {
+      "address": "EQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA2XZ",
+      "addressNonBounceable": "UQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zAzgc",
+      "owner": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
+      "holding": "1000000000 QTON",
+      "explorer": "https://tonscan.org/address/EQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA2XZ"
     }
   },
-  "broadcastAt": "2026-09-24T18:20:18.603Z",
-  "updatedAt": "2026-09-24T18:20:30.216Z",
-  "confirmedAt": "2026-09-24T18:20:30.216Z"
+  "adminOwner": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
+  "totalSupply": "1000000000 QTON",
+  "mintedAt": "2026-09-24T20:08:42.038Z"
 }

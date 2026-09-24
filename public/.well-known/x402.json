@@ -12,8 +12,9 @@
     "unifiedOwner": "BPshPrMazV7qunhcq18AvCHjSceHbKytiRDNrtCv68g3",
     "network": "ton-mainnet",
     "caip2": "ton:-239",
-    "smartContract": "EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
+    "smartContract": "EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
     "launchpad": "EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
+    "userJettonWallet": "EQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA2XZ",
     "currency": "TON",
     "supplyPolicy": "UNCAPPED_ELASTIC"
   },

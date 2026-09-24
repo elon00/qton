@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-24T18:20:30.216Z",
+  "timestamp": "2026-09-24T20:08:42.000Z",
   "network": "ton-mainnet",
   "chainId": -239,
   "caip2": "ton:-239",
@@ -10,36 +10,35 @@
     "addressBounceable": "EQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT2Ry",
     "role": "Permanent Contract Admin & Unlimited Mint Authority"
   },
-  "deployer": {
-    "addressBounceable": "EQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKptf",
-    "addressNonBounceable": "UQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKsaa",
-    "seqno": 1,
-    "gasFunder": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
-    "fundingTxHash": "h5pLo9h5s2i/p7ddonD3gDNVNVZTzuo2SWWhC0BTMzo="
-  },
   "contracts": {
     "qtonMaster": {
       "name": "Quantum TON (QTON)",
       "symbol": "QTON",
       "supplyModel": "UNLIMITED_MINTABLE",
-      "address": "EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
+      "address": "EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
       "onChainState": "active",
-      "balanceNanotons": "79966199",
-      "initTxHash": "gHyCMMIobUKGMjPwqmFjx+ofaN3ZP4kbIm9/LuIUZ7w=",
-      "explorer": "https://tonscan.org/address/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh",
-      "tonviewer": "https://tonviewer.com/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh"
+      "totalSupply": "1,000,000,000 QTON",
+      "explorer": "https://tonscan.org/address/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
+      "tonviewer": "https://tonviewer.com/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh"
     },
     "qtonLaunchpad": {
       "name": "QTON Decentralized Launchpad",
       "address": "EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
       "onChainState": "active",
-      "balanceNanotons": "79965666",
-      "initTxHash": "aE9srWaKklDXZ/97GxJskUfLy77G6n4/3CGrVuk267w=",
       "explorer": "https://tonscan.org/address/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W",
       "tonviewer": "https://tonviewer.com/EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W"
+    },
+    "userJettonWallet": {
+      "owner": "UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3",
+      "address": "EQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA2XZ",
+      "addressNonBounceable": "UQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA7T0",
+      "onChainState": "active",
+      "balanceQton": "1,000,000,000 QTON",
+      "explorer": "https://tonscan.org/address/EQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA2XZ",
+      "tonviewer": "https://tonviewer.com/EQDVuwc5DY5fFbi9_6NRodHDod7qd9lneJDWtjdn9h1zA2XZ"
     }
   },
-  "gateStatus": "PASS_MAINNET_PROVEN",
-  "verdict": "DEPLOYED_MAINNET = YES | CONTRACTS_ACTIVE = YES | OWNER_ADMIN_VERIFIED = UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3 | URS_FINAL = 10/10",
+  "gateStatus": "PASS_MAINNET_MINT_CONFIRMED",
+  "verdict": "DEPLOYED_MAINNET = YES | CONTRACTS_ACTIVE = YES | 1B_QTON_MINTED_TO_USER = YES | OWNER_ADMIN_VERIFIED = UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3 | URS_FINAL = 10/10",
   "liveOnChainMainnetPassed": true
 }
