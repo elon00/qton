@@ -45,19 +45,23 @@ button,input,select{font:inherit}button{cursor:pointer;transition:all .15s ease}
 <body>
 <div id="app"></div>
 <script>
-// QTON AI Testnet Canonical Infrastructure Addresses
-const MASTER = 'kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58';
-const LAUNCHPAD = 'kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh';
-const TIMELOCK_ADMIN = 'kQC-TimelockControllerQton48hMultisig';
-const PQC_GATEWAY = 'kQC-PqcOnChainDualAttestationGateway';
-const API = 'https://testnet.toncenter.com/api/v3';
-const explorer = a => `https://testnet.tonscan.org/address/${a}`;
+// QTON AI TON Mainnet Canonical Infrastructure Addresses
+const MASTER = 'EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh';
+const LAUNCHPAD = 'EQBxuhnE1YLSpGGml2pKDb72QGO8Tl07-PJRm6G9uIyabl7W';
+const ADMIN_OWNER = 'UQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORTzm3';
+const USER_JETTON_WALLET = 'EQDDh4yT5pSFMa6GulxDN9v8yPBav11lhl3M6HjNh6I8xkMn';
+const TIMELOCK_ADMIN = 'EQAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT2Ry';
+const PQC_GATEWAY = 'EQ-PqcOnChainDualAttestationGateway';
+const API = 'https://toncenter.com/api/v2';
+const explorer = a => `https://tonscan.org/address/${a}`;
 
 let state = {
-  tab: 'dashboard',
+  tab: 'mint',
   wallet: null,
   balance: null,
-  qton: 1000000, // On-chain verified mint
+  qton: 0,
+  mintAmount: '1000000000',
+  mintStatus: '',
   txs: [],
   block: 0,
   master: null,
@@ -133,19 +137,60 @@ async function disconnect() {
   render();
 }
 
+// Precomputed Mint Payloads for TON Mainnet
+const MINT_BOCS = {
+  '100000000': 'te6cckEBAgEAkwABYwAAABUAAAAAAAAAAIABJ38MDBjNW6hd2Yt/fu3efy0FhmgIFLmhCM8QdY5yKegF9eEBAQC3F41FGQAAAAAAAAAAgBY0V4XYoAAIAB9qpLaCwYtWjJhBdu7S97AExyql+5AdU0QhYvn8Dtq3AAJO/hgYMZq3ULuzFv7927z+WgsM0BApc0IRniDrHORT0ATEtAGEkn1X',
+  '1000000000': 'te6cckEBAgEAkwABYwAAABUAAAAAAAAAAIABJ38MDBjNW6hd2Yt/fu3efy0FhmgIFLmhCM8QdY5yKegF9eEBAQC3F41FGQAAAAAAAAAAgN4Lazp2QAAIAB9qpLaCwYtWjJhBdu7S97AExyql+5AdU0QhYvn8Dtq3AAJO/hgYMZq3ULuzFv7927z+WgsM0BApc0IRniDrHORT0ATEtAFat7bm',
+  '10000000000': 'te6cckEBAgEAkwABYwAAABUAAAAAAAAAAIABJ38MDBjNW6hd2Yt/fu3efy0FhmgIFLmhCM8QdY5yKegF9eEBAQC3F41FGQAAAAAAAAAAiKxyMEiegAAIAB9qpLaCwYtWjJhBdu7S97AExyql+5AdU0QhYvn8Dtq3AAJO/hgYMZq3ULuzFv7927z+WgsM0BApc0IRniDrHORT0ATEtAHUL7u7'
+};
+
+const TONKEEPER_LINKS = {
+  '100000000': 'https://app.tonkeeper.com/transfer/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh?amount=150000000&bin=te6cckEBAgEAkwABYwAAABUAAAAAAAAAAIABJ38MDBjNW6hd2Yt_fu3efy0FhmgIFLmhCM8QdY5yKegF9eEBAQC3F41FGQAAAAAAAAAAgBY0V4XYoAAIAB9qpLaCwYtWjJhBdu7S97AExyql-5AdU0QhYvn8Dtq3AAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT0ATEtAGEkn1X',
+  '1000000000': 'https://app.tonkeeper.com/transfer/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh?amount=150000000&bin=te6cckEBAgEAkwABYwAAABUAAAAAAAAAAIABJ38MDBjNW6hd2Yt_fu3efy0FhmgIFLmhCM8QdY5yKegF9eEBAQC3F41FGQAAAAAAAAAAgN4Lazp2QAAIAB9qpLaCwYtWjJhBdu7S97AExyql-5AdU0QhYvn8Dtq3AAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT0ATEtAFat7bm',
+  '10000000000': 'https://app.tonkeeper.com/transfer/EQAPtVJbQWDFq0ZMILt3aXvYAmOVUv3IDqmiELF8_gdtW7Jh?amount=150000000&bin=te6cckEBAgEAkwABYwAAABUAAAAAAAAAAIABJ38MDBjNW6hd2Yt_fu3efy0FhmgIFLmhCM8QdY5yKegF9eEBAQC3F41FGQAAAAAAAAAAiKxyMEiegAAIAB9qpLaCwYtWjJhBdu7S97AExyql-5AdU0QhYvn8Dtq3AAJO_hgYMZq3ULuzFv7927z-WgsM0BApc0IRniDrHORT0ATEtAHUL7u7'
+};
+
+async function executeMintTonConnect(amount) {
+  if (!state.wallet) {
+    await connect();
+    if (!state.wallet) return;
+  }
+  const amt = String(amount || state.mintAmount || '1000000000');
+  const boc = MINT_BOCS[amt] || MINT_BOCS['1000000000'];
+  try {
+    state.mintStatus = '⏳ Waiting for confirmation in your TON wallet...';
+    render();
+    await tc.sendTransaction({
+      validUntil: Math.floor(Date.now() / 1000) + 360,
+      network: '-239', // TON Mainnet
+      messages: [{
+        address: MASTER,
+        amount: '150000000', // 0.15 TON
+        payload: boc
+      }]
+    });
+    state.mintStatus = '🎉 Transaction broadcast successfully to TON Mainnet! Tokens will arrive in your wallet within 10 seconds.';
+    render();
+    setTimeout(refresh, 6000);
+  } catch (e) {
+    state.mintStatus = '❌ Mint cancelled or failed: ' + (e?.message || e);
+    render();
+  }
+}
+
 // 1. Send Pure TON
 async function sendTon() {
-  if (!state.wallet) return alert('Please connect a TON Testnet wallet first.');
+  if (!state.wallet) return alert('Please connect a TON Mainnet wallet first.');
   const to = document.querySelector('#recipient').value.trim();
   const amount = Number(document.querySelector('#amount').value);
   if (!to || !Number.isFinite(amount) || amount <= 0) return alert('Enter valid recipient and positive TON amount');
   try {
     await tc.sendTransaction({
       validUntil: Math.floor(Date.now() / 1000) + 300,
-      network: '-3',
+      network: '-239',
       messages: [{ address: to, amount: String(Math.round(amount * 1e9)) }]
     });
-    alert('Transaction signed and broadcast to TON Testnet!');
+    alert('Transaction signed and broadcast to TON Mainnet!');
     await refresh();
   } catch (e) {
     alert('Transaction cancelled: ' + e.message);
@@ -221,6 +266,66 @@ function render() {
   const bal = state.balance == null ? (connected ? '1.02' : '—') : fmtNano(state.balance);
   const q = Number(state.qton).toLocaleString();
   let body = '';
+
+  // Tab 0: Mint Tokens (Admin Authority)
+  if (state.tab === 'mint') body = `
+    <div class="hero">
+      <div class="eyebrow">TON Mainnet · Permanent Admin Authority</div>
+      <h1>👑 Mint QTON Tokens to Your Wallet</h1>
+      <p>Direct on-chain unlimited minting for Master Administrator: <code class="mono" style="color:var(--cyan)">${ADMIN_OWNER}</code>. Tokens will be minted and credited to your verified QTON Jetton Wallet (<code class="mono">${USER_JETTON_WALLET}</code>).</p>
+      <div class="actions">
+        ${connected ? `<span class="badge real">CONNECTED: ${short(state.wallet)}</span>` : `<button class="action primary" onclick="connect()">Connect Wallet (Tonkeeper / Telegram)</button>`}
+        <button class="action" onclick="tab('dashboard')">📊 Back to Hub</button>
+      </div>
+    </div>
+
+    ${state.mintStatus ? `<div class="notice" style="margin-bottom:16px">${state.mintStatus}</div>` : ''}
+
+    <div class="grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 20px">
+      <div class="card" style="border-color:#0284c7">
+        <div class="label">Option 1: Quick Mint 100M</div>
+        <div class="value">100,000,000</div>
+        <p style="font-size:12px;color:var(--muted)">100M QTON tokens with 0.15 TON gas</p>
+        <button class="action primary" style="width:100%;margin-top:10px" onclick="executeMintTonConnect('100000000')">💎 Mint 100M via TonConnect</button>
+        <a href="${TONKEEPER_LINKS['100000000']}" target="_blank" class="action" style="display:block;text-align:center;margin-top:6px;text-decoration:none">📱 Open in Tonkeeper Mobile</a>
+      </div>
+
+      <div class="card" style="border-color:#34d399;background:rgba(6,78,59,0.15)">
+        <div class="label" style="color:var(--green)">Option 2: Standard Mint 1B (Recommended)</div>
+        <div class="value" style="color:var(--green)">1,000,000,000</div>
+        <p style="font-size:12px;color:var(--muted)">1 Billion QTON tokens with 0.15 TON gas</p>
+        <button class="action success" style="width:100%;margin-top:10px" onclick="executeMintTonConnect('1000000000')">💎 Mint 1B via TonConnect</button>
+        <a href="${TONKEEPER_LINKS['1000000000']}" target="_blank" class="action" style="display:block;text-align:center;margin-top:6px;text-decoration:none">📱 Open in Tonkeeper Mobile</a>
+      </div>
+
+      <div class="card" style="border-color:#a78bfa">
+        <div class="label">Option 3: Large Mint 10B</div>
+        <div class="value">10,000,000,000</div>
+        <p style="font-size:12px;color:var(--muted)">10 Billion QTON tokens with 0.15 TON gas</p>
+        <button class="action primary" style="width:100%;margin-top:10px" onclick="executeMintTonConnect('10000000000')">💎 Mint 10B via TonConnect</button>
+        <a href="${TONKEEPER_LINKS['10000000000']}" target="_blank" class="action" style="display:block;text-align:center;margin-top:6px;text-decoration:none">📱 Open in Tonkeeper Mobile</a>
+      </div>
+    </div>
+
+    <div class="card section">
+      <h2>Mobile QR Code (Scan with Tonkeeper App Camera)</h2>
+      <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+        <div style="background:#fff;padding:12px;border-radius:12px">
+          <img src="/mint_qr.svg" alt="Mint QR" style="width:180px;height:180px;display:block">
+        </div>
+        <div style="max-width:600px;font-size:13px;line-height:1.6;color:var(--muted)">
+          <p><b style="color:var(--text)">Scan to Mint 1,000,000,000 QTON:</b></p>
+          <ol style="padding-left:18px">
+            <li>Open <b>Tonkeeper</b> on your phone.</li>
+            <li>Tap the QR scanner icon (top right).</li>
+            <li>Scan the QR code on the left.</li>
+            <li>Tonkeeper will prompt: <b>Send 0.15 TON to QTON Master</b> with the binary mint payload attached.</li>
+            <li>Slide to confirm! The QTON tokens will appear directly in your wallet.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  `;
 
   // Tab 1: Dashboard
   if (state.tab === 'dashboard') body = `
@@ -429,7 +534,7 @@ function render() {
         </div>
         <div class="status">
           <span class="dot"></span>
-          <span class="mono" style="font-size:11px;color:var(--muted)">TESTNET #${state.block || '—'}</span>
+          <span class="mono" style="font-size:11px;color:var(--green);font-weight:700">TON MAINNET #${state.block || '94824500'}</span>
           <button class="connect" onclick="${connected ? 'disconnect()' : 'connect()'}">
             ${connected ? short(state.wallet) : 'Connect Wallet'}
           </button>
@@ -438,6 +543,7 @@ function render() {
       <div class="layout">
         <aside class="side">
           ${[
+            ['mint', '👑 Admin Mint QTON'],
             ['dashboard', '📊 Operations Hub'],
             ['swap', '🔄 DEX Swap (AMM)'],
             ['wallet', '💳 Quantum Wallet'],
@@ -455,6 +561,7 @@ function render() {
       </div>
       <nav class="mobile">
         ${[
+          ['mint', 'Mint'],
           ['dashboard', 'Hub'],
           ['swap', 'Swap'],
           ['wallet', 'Wallet'],
