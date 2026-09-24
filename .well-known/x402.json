@@ -1,0 +1,110 @@
+{
+  "x402Version": 2,
+  "service": "QTON Quantum-Secured TON Infrastructure & Jetton Launchpad",
+  "facilitator": "https://x402.org/facilitator",
+  "ready": true,
+  "catalogRegistration": "A Bazaar-capable facilitator indexes a resource after a conformant paid settlement echoes the bazaar extension.",
+  "provider": {
+    "name": "QTON AI / Martin",
+    "website": "https://elon00.github.io/qton/",
+    "payTo": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+    "unifiedOwner": "BPshPrMazV7qunhcq18AvCHjSceHbKytiRDNrtCv68g3",
+    "network": "ton-testnet",
+    "caip2": "ton:-3",
+    "smartContract": "kQCI8yoRda7UzQSOOypvN_trGrzNb4tGmRR9N-S9LOG-wW58",
+    "launchpad": "kQAHuKwr2EhHjjq4wG_xbUA7WtSw9j9OH9rfFrcBvxczgpmh",
+    "currency": "TON",
+    "supplyPolicy": "UNCAPPED_ELASTIC"
+  },
+  "items": [
+    {
+      "resource": "https://elon00.github.io/qton/api/v1/x402/pqc/sign",
+      "type": "http",
+      "x402Version": 2,
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "ton:-3",
+          "amount": "10000000",
+          "asset": "native",
+          "payTo": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+          "maxTimeoutSeconds": 60,
+          "extra": {
+            "name": "TON",
+            "version": "2"
+          }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": {
+                "action": "PQC_SIGN_TON_TX",
+                "payload": {
+                  "digest": "sha256_of_ton_tx"
+                }
+              }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "success": true,
+                "protocol": "x402-v2",
+                "service": "qton-pqc-signature"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resource": "https://elon00.github.io/qton/api/v1/x402/launchpad/quote",
+      "type": "http",
+      "x402Version": 2,
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "ton:-3",
+          "amount": "10000000",
+          "asset": "native",
+          "payTo": "kQC2Lo6MZgFe-AYQX8QNrtUASqkk_Ka_Shiej2mmkHxLg49t",
+          "maxTimeoutSeconds": 60,
+          "extra": {
+            "name": "TON",
+            "version": "2"
+          }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": {
+                "action": "LAUNCHPAD_PROJECT_QUOTE",
+                "payload": {
+                  "name": "Project Name",
+                  "symbol": "PRJ"
+                }
+              }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "success": true,
+                "protocol": "x402-v2",
+                "service": "qton-launchpad-quote"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
