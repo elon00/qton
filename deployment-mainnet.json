@@ -1,0 +1,35 @@
+{
+  "network": "ton-mainnet",
+  "chainId": -239,
+  "caip2": "ton:-239",
+  "rpcEndpoint": "https://toncenter.com/api/v2/jsonRPC",
+  "status": "AWAITING_GAS_FUNDING",
+  "deployer": {
+    "addressBounceable": "EQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKptf",
+    "addressNonBounceable": "UQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKsaa",
+    "raw": "0:73d290f8681fdfaa43319390af02c31d11857a1a9d2a82b55688757b1d7ae22a",
+    "currentBalanceTon": "0",
+    "requiredMinTon": "0.25",
+    "recommendedFundTon": "0.3"
+  },
+  "contracts": {
+    "qtonMaster": {
+      "predictedAddressBounceable": "EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
+      "predictedAddressNonBounceable": "UQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESPFk",
+      "name": "Quantum TON (QTON)",
+      "symbol": "QTON",
+      "supplyModel": "UNLIMITED_MINTABLE",
+      "explorer": "https://tonscan.org/address/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh",
+      "tonviewer": "https://tonviewer.com/EQCrjfyr3T4GnH5MEFNHHEGOwRm3nXVqhqHHhqlnGYOESKyh"
+    },
+    "qtonLaunchpad": {
+      "predictedAddressBounceable": "EQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDpdE",
+      "predictedAddressNonBounceable": "UQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDsqB",
+      "name": "QTON Decentralized Launchpad",
+      "explorer": "https://tonscan.org/address/EQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDpdE",
+      "tonviewer": "https://tonviewer.com/EQBiIl6W-yt1lLrFDa1YWjb6g_lkl8ovWL8lln55blOEDpdE"
+    }
+  },
+  "paymentDeepLink": "ton://transfer/UQBz0pD4aB_fqkMxk5CvAsMdEYV6Gp0qgrVWiHV7HXriKsaa?amount=300000000&text=Fund%20QTON%20Mainnet%20Deployer",
+  "updatedAt": "2026-09-24T18:01:56.290Z"
+}
