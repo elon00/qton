@@ -1,0 +1,320 @@
+{
+  "engine": "REA_Reverse_Engineer_Anything",
+  "status": "STRUCTURE_RECONSTRUCTED",
+  "analyzed_files": 104,
+  "manifest": {
+    "CONTRIBUTING.md": {
+      "bytes": 1000
+    },
+    "deployment-mainnet.json": {
+      "bytes": 1326
+    },
+    "deployment-testnet.json": {
+      "bytes": 881
+    },
+    "icon-180.png": {
+      "bytes": 916
+    },
+    "index.html": {
+      "bytes": 23880
+    },
+    "LICENSE": {
+      "bytes": 10349
+    },
+    "Link MasterPlanAI": {
+      "bytes": 51
+    },
+    "mainnet-evidence.json": {
+      "bytes": 2114
+    },
+    "mainnet_wallet_qr.svg": {
+      "bytes": 3364
+    },
+    "mint-options.json": {
+      "bytes": 26265
+    },
+    "mint-transaction.json": {
+      "bytes": 1391
+    },
+    "netlify.toml": {
+      "bytes": 612
+    },
+    "package-lock.json": {
+      "bytes": 56915
+    },
+    "package.json": {
+      "bytes": 2095
+    },
+    "Project Description": {
+      "bytes": 1561
+    },
+    "qton-evidence-registry.json": {
+      "bytes": 5939
+    },
+    "qton_logo.png": {
+      "bytes": 916
+    },
+    "README.md": {
+      "bytes": 6331
+    },
+    "REALITY_MANIFEST.json": {
+      "bytes": 3548
+    },
+    "SECURITY.md": {
+      "bytes": 1447
+    },
+    "testnet-evidence.json": {
+      "bytes": 2540
+    },
+    "testnet-wallet.example.json": {
+      "bytes": 292
+    },
+    "testnet_wallet_qr.svg": {
+      "bytes": 2947
+    },
+    "THE-CREATOR-GOVERNANCE.md": {
+      "bytes": 590
+    },
+    "Ton-Society-Hackathon-Submission.pptx": {
+      "bytes": 10460264
+    },
+    "tonconnect-manifest.json": {
+      "bytes": 341
+    },
+    "URS_EVIDENCE_CERTIFICATE.json": {
+      "bytes": 11719
+    },
+    ".github\\dependabot.yml": {
+      "bytes": 283
+    },
+    "contracts\\masterplan_ai.fc": {
+      "bytes": 1773
+    },
+    "contracts\\op-codes.fc": {
+      "bytes": 967
+    },
+    "contracts\\params.fc": {
+      "bytes": 294
+    },
+    "contracts\\qton_launchpad.fc": {
+      "bytes": 3433
+    },
+    "contracts\\qton_master.fc": {
+      "bytes": 6165
+    },
+    "contracts\\qton_pqc_gateway.fc": {
+      "bytes": 4339
+    },
+    "contracts\\qton_timelock.fc": {
+      "bytes": 11214
+    },
+    "contracts\\qton_wallet.fc": {
+      "bytes": 7771
+    },
+    "docs\\INCIDENT_RESPONSE_RUNBOOK.md": {
+      "bytes": 2414
+    },
+    "docs\\LEGAL_COMPLIANCE_MEMO.md": {
+      "bytes": 2235
+    },
+    "docs\\SECURITY_AUDIT_REPORT.md": {
+      "bytes": 3394
+    },
+    "docs\\TESTNET_E2E_EVIDENCE.md": {
+      "bytes": 2406
+    },
+    "docs\\TOKENOMICS.md": {
+      "bytes": 2585
+    },
+    "docs\\WHITEPAPER.md": {
+      "bytes": 9610
+    },
+    "public\\mint_qr.svg": {
+      "bytes": 7685
+    },
+    "scripts\\audit-crypto.mjs": {
+      "bytes": 7194
+    },
+    "scripts\\check-jetton.ts": {
+      "bytes": 1124
+    },
+    "scripts\\compile.mjs": {
+      "bytes": 3576
+    },
+    "scripts\\deploy-mainnet.ts": {
+      "bytes": 13768
+    },
+    "scripts\\deploy-testnet.ts": {
+      "bytes": 7533
+    },
+    "scripts\\execute-mainnet-mint.ts": {
+      "bytes": 10499
+    },
+    "scripts\\generate-mint-options.ts": {
+      "bytes": 1863
+    },
+    "scripts\\generate-urs-certificate.ts": {
+      "bytes": 4558
+    },
+    "scripts\\monitor-health.ts": {
+      "bytes": 2765
+    },
+    "scripts\\prepare-mint.ts": {
+      "bytes": 4206
+    },
+    "scripts\\reality-all.ts": {
+      "bytes": 14113
+    },
+    "scripts\\reality-universal.ts": {
+      "bytes": 16865
+    },
+    "scripts\\rea_inspector.py": {
+      "bytes": 1485
+    },
+    "scripts\\rsi_engine.py": {
+      "bytes": 2039
+    },
+    "scripts\\security-audit.ts": {
+      "bytes": 3508
+    },
+    "scripts\\seed-dex-liquidity.ts": {
+      "bytes": 2476
+    },
+    "scripts\\send-daily-ton.ts": {
+      "bytes": 4694
+    },
+    "scripts\\serve-tma.mjs": {
+      "bytes": 1619
+    },
+    "scripts\\serve-ui.mjs": {
+      "bytes": 1909
+    },
+    "scripts\\test-live-onchain.ts": {
+      "bytes": 8290
+    },
+    "scripts\\testnet-reality-gate.ts": {
+      "bytes": 12317
+    },
+    "scripts\\verify-contract-identity.ts": {
+      "bytes": 4990
+    },
+    "scripts\\wallet-info.ts": {
+      "bytes": 3224
+    },
+    "src\\index.ts": {
+      "bytes": 332
+    },
+    "src\\qton_pqc_gateway.ts": {
+      "bytes": 6955
+    },
+    "src\\ton_pqc_gateway.ts": {
+      "bytes": 2062
+    },
+    "src\\types.ts": {
+      "bytes": 967
+    },
+    "tests\\adversarial-fuzz.spec.ts": {
+      "bytes": 9105
+    },
+    "tests\\nist-pqc.test.mjs": {
+      "bytes": 4368
+    },
+    "tests\\pqc-attack-matrix.spec.ts": {
+      "bytes": 7386
+    },
+    "tests\\pqc-gateway.spec.ts": {
+      "bytes": 4518
+    },
+    "tests\\qton.spec.ts": {
+      "bytes": 13898
+    },
+    "tests\\reality_check_harness.py": {
+      "bytes": 1250
+    },
+    "tests\\test-deploy-mint-admin.ts": {
+      "bytes": 3689
+    },
+    "tests\\timelock-governance.spec.ts": {
+      "bytes": 5134
+    },
+    "ui\\icon-180.png": {
+      "bytes": 916
+    },
+    "ui\\index.html": {
+      "bytes": 31041
+    },
+    "ui\\mint_qr.svg": {
+      "bytes": 7685
+    },
+    "ui\\package.json": {
+      "bytes": 768
+    },
+    "ui\\qton_logo.png": {
+      "bytes": 916
+    },
+    "ui\\tonconnect-manifest.json": {
+      "bytes": 341
+    },
+    ".github\\workflows\\daily-ton-drip.yml": {
+      "bytes": 1371
+    },
+    ".github\\workflows\\qmoosa-rsi-rea-sync.yml": {
+      "bytes": 531
+    },
+    ".github\\workflows\\qton-pages.yml": {
+      "bytes": 995
+    },
+    ".github\\workflows\\security.yml": {
+      "bytes": 1399
+    },
+    ".github\\workflows\\testnet-reality-gate.yml": {
+      "bytes": 1446
+    },
+    "contracts\\imports\\stdlib.fc": {
+      "bytes": 36666
+    },
+    "netlify\\functions\\api.ts": {
+      "bytes": 5967
+    },
+    "src\\agentics\\multi_model_chatbot.ts": {
+      "bytes": 3751
+    },
+    "src\\automaton\\conway_ai.ts": {
+      "bytes": 3392
+    },
+    "src\\contracts\\QtonLaunchpad.ts": {
+      "bytes": 2135
+    },
+    "src\\contracts\\QtonMaster.ts": {
+      "bytes": 3419
+    },
+    "src\\contracts\\QtonPqcGateway.ts": {
+      "bytes": 2692
+    },
+    "src\\contracts\\QtonTimelock.ts": {
+      "bytes": 4355
+    },
+    "src\\contracts\\QtonWallet.ts": {
+      "bytes": 1899
+    },
+    "src\\dex\\dedust-integration.ts": {
+      "bytes": 2249
+    },
+    "src\\dex\\stonfi-integration.ts": {
+      "bytes": 3333
+    },
+    "src\\utils\\jetton-content.ts": {
+      "bytes": 1301
+    },
+    "src\\utils\\pqcCrypto.ts": {
+      "bytes": 7779
+    },
+    "src\\utils\\qr_generator.ts": {
+      "bytes": 1569
+    },
+    "ui\\src\\main.tsx": {
+      "bytes": 222
+    }
+  },
+  "timestamp": 1794027820
+}
