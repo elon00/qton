@@ -6,3 +6,6 @@ build/
 testnet-wallet.json
 mainnet-wallet.json
 .env
+
+# Lean 4 build artifacts
+lean_verify/.lake/
